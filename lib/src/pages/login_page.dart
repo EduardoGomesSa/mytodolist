@@ -5,8 +5,17 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(),
+    return const Scaffold(
+      body: Column(
+        children: [
+          Column(
+            children: [Text('Logo')],
+          ),
+          Column(
+            children: [Text('Form Login')],
+          )
+        ],
+      ),
     );
   }
 }
