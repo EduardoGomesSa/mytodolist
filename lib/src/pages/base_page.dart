@@ -6,7 +6,11 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          
+        ],
+      ),
     );
   }
 }
