@@ -30,7 +30,6 @@ class LoginPage extends StatelessWidget {
                 TextFieldWidget(
                   icon: Icons.email,
                   label: 'email',
-                  isSecret: false,
                 ),
                 TextFieldWidget(
                   icon: Icons.lock,

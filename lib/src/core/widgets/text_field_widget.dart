@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatelessWidget {
+class TextFieldWidget extends StatefulWidget {
   const TextFieldWidget({
     super.key,
     required this.label,
     required this.icon,
-    required this.isSecret,
+    this.isSecret = false,
   });
 
   final String label;
@@ -13,14 +13,38 @@ class TextFieldWidget extends StatelessWidget {
   final bool isSecret;
 
   @override
+  State<TextFieldWidget> createState() => _TextFieldWidgetState();
+}
+
+class _TextFieldWidgetState extends State<TextFieldWidget> {
+  bool isObscure = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isObscure = widget.isSecret;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextField(
-        obscureText: isSecret,
+        obscureText: isObscure,
         decoration: InputDecoration(
-            prefixIcon: Icon(icon),
-            labelText: label,
+            prefixIcon: Icon(widget.icon),
+            suffixIcon: widget.isSecret
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscure = !isObscure;
+                      });
+                    },
+                    icon: Icon(
+                        isObscure ? Icons.visibility : Icons.visibility_off))
+                : null,
+            labelText: widget.label,
             isDense: true,
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(18))),
