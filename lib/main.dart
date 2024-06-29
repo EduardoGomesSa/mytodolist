@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mytodolist/src/pages/home/home_page.dart';
-
+import 'package:mytodolist/src/pages/auth/login_page.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -14,10 +13,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white.withAlpha(190),
+        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
-      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
+      home: const LoginPage(),
     );
   }
 }

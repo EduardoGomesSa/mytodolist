@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         children: [
-          Column(
-            children: [Text('Logo')],
+          const Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('Logo')],
+            ),
           ),
-          Column(
-            children: [Text('Form Login')],
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 32,
+              vertical: 40,
+            ),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(45))
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFieldWidget()
+              ],
+            ),
           )
         ],
       ),
