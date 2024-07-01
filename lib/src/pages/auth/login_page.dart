@@ -24,18 +24,20 @@ class LoginPage extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.vertical(top: Radius.circular(45))
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                TextFieldWidget(
+                const TextFieldWidget(
                   icon: Icons.email,
                   label: 'email',
                 ),
-                TextFieldWidget(
+                const TextFieldWidget(
                   icon: Icons.lock,
                   label: 'password',
                   isSecret: true,
-                )
+                ),
+
+                TextButton(onPressed: (){}, child: const Text('Entrar'))
               ],
             ),
           )
