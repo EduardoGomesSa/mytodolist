@@ -37,7 +37,9 @@ class LoginPage extends StatelessWidget {
                   isSecret: true,
                 ),
 
-                OutlinedButton(onPressed: (){}, child: const Text('Entrar'))
+                OutlinedButton(onPressed: (){}, child: const Text('Entrar')),
+
+                TextButton(onPressed: (){}, child: const Text('Não tem uma conta? Crie aqui'))
               ],
             ),
           )
