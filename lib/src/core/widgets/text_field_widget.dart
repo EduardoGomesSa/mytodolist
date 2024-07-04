@@ -47,7 +47,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             labelText: widget.label,
             isDense: true,
             border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(18))),
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
       ),
     );
   }

@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                 OutlinedButton(
                   onPressed: (){},
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(
+                    side: const BorderSide(
                       color: Colors.blue
                     )
                   ),
