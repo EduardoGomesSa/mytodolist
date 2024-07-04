@@ -51,9 +51,15 @@ class LoginPage extends StatelessWidget {
                   ]),
                 ),
 
-
-
-                OutlinedButton(onPressed: (){}, child: const Text('Não tem uma conta? Crie aqui'))
+                OutlinedButton(
+                  onPressed: (){},
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(
+                      color: Colors.blue
+                    )
+                  ),
+                  child: const Text('Não tem uma conta? Crie aqui'),
+                ),
               ],
             ),
           )
