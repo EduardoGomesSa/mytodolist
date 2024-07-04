@@ -39,6 +39,18 @@ class LoginPage extends StatelessWidget {
 
                 ElevatedButton(onPressed: (){}, child: const Text('Entrar')),
 
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 10, top: 15),
+                  child: Row(children: [
+                    Expanded(child: Divider(color: Colors.grey,)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Text('Ou', style: TextStyle(color: Colors.grey),),
+                    ),
+                    Expanded(child: Divider(color: Colors.grey,)),
+                  ]),
+                ),
+
 
 
                 OutlinedButton(onPressed: (){}, child: const Text('Não tem uma conta? Crie aqui'))
