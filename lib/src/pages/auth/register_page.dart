@@ -5,6 +5,15 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(body: Column(
+      children: [
+        Expanded(child: Column(children: [
+          Text('Logo')
+        ],
+      ),
+      ),
+      Container(child: Text('Formulario'),),
+      ],
+    ),);
   }
 }
