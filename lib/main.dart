@@ -17,13 +17,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.blue,
-        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.login,
       getPages: AppPages.pages,
-      // home: const LoginPage(),
     );
   }
 }
