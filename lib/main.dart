@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
 import 'package:mytodolist/src/pages/auth/login_page.dart';
 void main() {
   runApp(const MyApp());
@@ -10,7 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -19,7 +21,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
+      initialRoute: AppRoutes.login,
+      getPages: AppPages.pages,
+      // home: const LoginPage(),
     );
   }
 }

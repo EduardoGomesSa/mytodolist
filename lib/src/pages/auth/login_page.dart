@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 
 class LoginPage extends StatelessWidget {
@@ -21,9 +23,8 @@ class LoginPage extends StatelessWidget {
               vertical: 40,
             ),
             decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(45))
-            ),
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -36,28 +37,33 @@ class LoginPage extends StatelessWidget {
                   label: 'password',
                   isSecret: true,
                 ),
-
-                ElevatedButton(onPressed: (){}, child: const Text('Entrar')),
-
+                ElevatedButton(onPressed: () {}, child: const Text('Entrar')),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 10, top: 15),
                   child: Row(children: [
-                    Expanded(child: Divider(color: Colors.grey,)),
+                    Expanded(
+                        child: Divider(
+                      color: Colors.grey,
+                    )),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Text('Ou', style: TextStyle(color: Colors.grey),),
+                      child: Text(
+                        'Ou',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                     ),
-                    Expanded(child: Divider(color: Colors.grey,)),
+                    Expanded(
+                        child: Divider(
+                      color: Colors.grey,
+                    )),
                   ]),
                 ),
-
                 OutlinedButton(
-                  onPressed: (){},
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.register);
+                  },
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(
-                      color: Colors.blue
-                    )
-                  ),
+                      side: const BorderSide(color: Colors.blue)),
                   child: const Text('Não tem uma conta? Crie aqui'),
                 ),
               ],
