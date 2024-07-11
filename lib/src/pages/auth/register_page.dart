@@ -6,38 +6,57 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Column(
-      children: [
-        const Expanded(
-          child: Column(
-            children: [
-              Text('Logo'
-          )
+    return Scaffold(
+      body: Column(
+        children: [
+          const Expanded(
+            child: Column(
+              children: [Text('Logo')],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 32,
+              vertical: 40,
+            ),
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(45),
+                )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const TextFieldWidget(
+                  label: 'nome',
+                  icon: Icons.person,
+                ),
+                const TextFieldWidget(
+                  label: 'email',
+                  icon: Icons.email,
+                ),
+                const TextFieldWidget(
+                  label: 'senha',
+                  icon: Icons.lock,
+                  isSecret: true,
+                ),
+                const TextFieldWidget(
+                  label: 'confirmar senha',
+                  icon: Icons.lock,
+                  isSecret: true,
+                ),
+                SizedBox(
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Cadastrar'),
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       ),
-      ),
-      Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 32,
-          vertical: 40,
-        ),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(45))
-        ),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextFieldWidget(label: 'nome', icon: Icons.person),
-            TextFieldWidget(
-              label: 'email', icon: Icons.email
-            ),
-            TextFieldWidget(label: 'senha', icon: Icons.lock, isSecret: true,),
-            TextFieldWidget(label: 'confirmar senha', icon: Icons.lock, isSecret: true,),
-          ],
-        ),
-      ),
-    ],
-    ),);
+    );
   }
 }

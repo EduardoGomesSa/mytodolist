@@ -37,7 +37,12 @@ class LoginPage extends StatelessWidget {
                   label: 'senha',
                   isSecret: true,
                 ),
-                ElevatedButton(onPressed: () {}, child: const Text('Entrar')),
+                SizedBox(
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Entrar'),
+                    )),
                 const Padding(
                   padding: EdgeInsets.only(bottom: 10, top: 15),
                   child: Row(children: [
@@ -58,13 +63,16 @@ class LoginPage extends StatelessWidget {
                     )),
                   ]),
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.register);
-                  },
-                  style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.blue)),
-                  child: const Text('Não tem uma conta? Crie aqui'),
+                SizedBox(
+                  height: 45,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.register);
+                    },
+                    style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.blue)),
+                    child: const Text('Não tem uma conta? Crie aqui'),
+                  ),
                 ),
               ],
             ),
