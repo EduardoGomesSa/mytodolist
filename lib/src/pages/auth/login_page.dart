@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const TextFieldWidget(
                   icon: Icons.lock,
-                  label: 'password',
+                  label: 'senha',
                   isSecret: true,
                 ),
                 ElevatedButton(onPressed: () {}, child: const Text('Entrar')),
