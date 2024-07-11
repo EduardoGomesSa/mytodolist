@@ -5,8 +5,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text('Tela home'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Todas as músicas'),
+      ),
+      body: const SingleChildScrollView(child: Column(children: [],),),
     );
   }
 }
