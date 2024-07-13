@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
-import 'package:mytodolist/src/pages/auth/login_page.dart';
 void main() {
   runApp(const MyApp());
 }
