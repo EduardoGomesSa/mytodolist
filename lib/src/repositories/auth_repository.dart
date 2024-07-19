@@ -1,6 +1,9 @@
+import 'package:get/get.dart';
 import 'package:mytodolist/src/core/services/http_manager.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
+import 'package:mytodolist/src/core/utils/urls.dart';
+import 'package:mytodolist/src/models/user_model.dart';
 
 class AuthRepository {
   final HttpManager httpManager;
@@ -11,5 +14,28 @@ class AuthRepository {
     required this.appUtils,
   });
 
-  //Future<ApiResult<UserM
+  Future<ApiResult<UserModel>> signIn(
+      {required String email, required String password}) async {
+    const String endpoint = "${Url.base}/login";
+
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.post,
+      body: {
+        'email': email,
+        'password': password,
+      },
+    );
+
+    if (response['data'] != null) {
+      UserModel user = UserModel.fromMap(response['data']);
+      appUtils.saveLocalData(key: "user-token", data: user.token!);
+
+      return ApiResult<UserModel>(data: user);
+    } else {
+      String message =
+          response['error'] ?? 'Não foi possível fazer login. Tente novamente!';
+      return ApiResult<UserModel>(message: message, isError: true);
+    }
+  }
 }

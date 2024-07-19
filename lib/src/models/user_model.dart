@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
-
 class UserModel {
   int? id;
   String? name;
