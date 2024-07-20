@@ -62,4 +62,24 @@ class AuthRepository {
       return ApiResult<UserModel>(message: message, isError: true);
     }
   }
+
+  Future<ApiResult<UserModel>> validateToken(String token) async {
+    const String endpoint = "${Url.base}/validate-token";
+
+    final response = await httpManager
+        .request(url: endpoint, method: HttpMethods.post, headers: {
+      'Authorization': 'Bearer $token',
+    });
+
+    if (response['data'] != null) {
+      UserModel user = UserModel.fromMap(response['data']);
+
+      appUtils.saveLocalData(key: "user-token", data: user.token!);
+
+      return ApiResult<UserModel>(data: user);
+    } else {
+      String message = response['error'] ?? "Realize login novamente";
+      return ApiResult<UserModel>(message: message, isError: true);
+    }
+  }
 }
