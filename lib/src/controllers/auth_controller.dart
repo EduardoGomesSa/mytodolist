@@ -31,4 +31,20 @@ class AuthController extends GetxController {
 
     isLoading.value = false;
   }
+
+  Future signIn({required String email, required String password}) async {
+    isLoading.value = true;
+
+    ApiResult<UserModel> result =
+        await repository.signIn(email: email, password: password);
+
+    if (!result.isError) {
+      user = result.data!;
+      Get.offAllNamed(AppRoutes.home);
+    } else {
+      appUtils.showToast(message: result.message!, isError: true);
+    }
+
+    isLoading.value = false;
+  }
 }
