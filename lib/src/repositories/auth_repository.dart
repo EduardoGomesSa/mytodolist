@@ -82,4 +82,18 @@ class AuthRepository {
       return ApiResult<UserModel>(message: message, isError: true);
     }
   }
+
+  Future<String?> signOut({required String token}) async {
+    const String endpoint = "${Url.base}/logout";
+    final response = await httpManager
+        .request(url: endpoint, method: HttpMethods.post, headers: {
+      'Authorization': 'Bearer $token',
+    });
+
+    if (response['message'] != null) {
+      return response['message'];
+    } else {
+      return null;
+    }
+  }
 }
