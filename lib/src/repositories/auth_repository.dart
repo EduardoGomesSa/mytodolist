@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:mytodolist/src/core/services/http_manager.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
