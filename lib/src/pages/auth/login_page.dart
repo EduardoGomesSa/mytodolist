@@ -12,8 +12,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -33,56 +31,61 @@ class LoginPage extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(45))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const TextFieldWidget(
-                    icon: Icons.email,
-                    label: 'email',
-                  ),
-                  const TextFieldWidget(
-                    icon: Icons.lock,
-                    label: 'senha',
-                    isSecret: true,
-                  ),
-                  SizedBox(
-                      height: 45,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('Entrar'),
-                      )),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 10, top: 15),
-                    child: Row(children: [
-                      Expanded(
-                          child: Divider(
-                        color: Colors.grey,
-                      )),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          'Ou',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ),
-                      Expanded(
-                          child: Divider(
-                        color: Colors.grey,
-                      )),
-                    ]),
-                  ),
-                  SizedBox(
-                    height: 45,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.register);
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.blue)),
-                      child: const Text('Não tem uma conta? Crie aqui'),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TextFieldWidget(
+                      controller: emailTextController,
+                      icon: Icons.email,
+                      label: 'Email',
                     ),
-                  ),
-                ],
+                    TextFieldWidget(
+                      controller: passwordTextController,
+                      icon: Icons.lock,
+                      label: 'Senha',
+                      isSecret: true,
+                    ),
+                    SizedBox(
+                        height: 45,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Entrar'),
+                        )),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 10, top: 15),
+                      child: Row(children: [
+                        Expanded(
+                            child: Divider(
+                          color: Colors.grey,
+                        )),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Text(
+                            'Ou',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                        Expanded(
+                            child: Divider(
+                          color: Colors.grey,
+                        )),
+                      ]),
+                    ),
+                    SizedBox(
+                      height: 45,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.register);
+                        },
+                        style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: Colors.blue)),
+                        child: const Text('Não tem uma conta? Crie aqui'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],
