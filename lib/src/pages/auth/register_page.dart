@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+
+  final _formKey = GlobalKey<FormState>();
+  final nameTextController = TextEditingController();
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
+  final passwordConfirmedController = TextEditingController();
+
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +37,27 @@ class RegisterPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const TextFieldWidget(
+                TextFieldWidget(
                   label: 'nome',
                   icon: Icons.person,
+                  controller: nameTextController,
                 ),
-                const TextFieldWidget(
+                TextFieldWidget(
                   label: 'email',
                   icon: Icons.email,
+                  controller: emailTextController,
                 ),
-                const TextFieldWidget(
+                TextFieldWidget(
                   label: 'senha',
                   icon: Icons.lock,
                   isSecret: true,
+                  controller: passwordTextController,
                 ),
-                const TextFieldWidget(
+                TextFieldWidget(
                   label: 'confirmar senha',
                   icon: Icons.lock,
                   isSecret: true,
+                  controller: passwordConfirmedController,
                 ),
                 SizedBox(
                   height: 45,
