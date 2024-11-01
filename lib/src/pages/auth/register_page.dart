@@ -82,7 +82,7 @@ class RegisterPage extends StatelessWidget {
                         onPressed: controller.isLoading.value
                             ? null
                             : () {
-                                Focus.of(context).unfocus();
+                                FocusScope.of(context).unfocus();
 
                                 if (_formKey.currentState!.validate()) {
                                   if (passwordTextController.value ==

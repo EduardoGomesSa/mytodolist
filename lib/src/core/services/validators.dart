@@ -13,7 +13,7 @@ String? emailvalidator(String? email) {
 }
 
 String? passwordValidator(password) {
-  if (password == null || password.isEmpty || password.isBlank) {
+  if (password == null || password.isEmpty) {
     return "Digite sua senha!";
   }
 
@@ -25,7 +25,7 @@ String? passwordValidator(password) {
 }
 
 String? nameValidator(name) {
-  if (name == null || name.isBlank || name.isEmpty) {
+  if (name == null || name.isEmpty) {
     return "Digite seu nome!";
   }
 
