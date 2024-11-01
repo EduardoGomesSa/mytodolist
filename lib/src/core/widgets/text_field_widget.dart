@@ -8,6 +8,7 @@ class TextFieldWidget extends StatefulWidget {
     this.isSecret = false,
     this.controller,
     this.validator,
+    this.onSaved,
   });
 
   final String label;
@@ -15,6 +16,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool isSecret;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final void Function(String?)? onSaved;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -34,9 +36,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
-      child: TextField(
+      child: TextFormField(
         controller: widget.controller,
         obscureText: isObscure,
+        validator: widget.validator,
+        onSaved: widget.onSaved,
         decoration: InputDecoration(
             prefixIcon: Icon(widget.icon),
             suffixIcon: widget.isSecret
