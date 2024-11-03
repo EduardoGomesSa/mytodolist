@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
@@ -19,14 +20,22 @@ class LoginPage extends StatelessWidget {
     //   child: Text('Funcionou PORRAAAAA'),
     // );
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Expanded(
+           Expanded(
             flex: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Center(child: Text('Logo'))],
+            child: Container(
+              color: Colors.blue,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Text('Logo'),
+                  ),
+                ],
+              ),
             ),
           ),
           Container(

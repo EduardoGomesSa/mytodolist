@@ -16,7 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'My ToDo List',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 20)
+        ),
         useMaterial3: false,
       ),
       debugShowCheckedModeBanner: false,
