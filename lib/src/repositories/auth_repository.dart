@@ -55,7 +55,7 @@ class AuthRepository {
 
       return ApiResult<UserModel>(data: user);
     } else {
-      String message = response['error'] ??
+      String message = response['message'] ??
           'Não foi possível fazer o cadastro.Tente novamente!';
 
       return ApiResult<UserModel>(message: message, isError: true);

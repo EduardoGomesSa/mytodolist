@@ -85,6 +85,8 @@ class RegisterPage extends StatelessWidget {
                                 FocusScope.of(context).unfocus();
 
                                 if (_formKey.currentState!.validate()) {
+                                  _formKey.currentState!.save();
+                                  
                                   if (passwordTextController.value ==
                                       passwordConfirmedController.value) {
                                     controller.signUp();
