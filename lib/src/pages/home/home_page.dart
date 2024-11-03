@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mytodolist/src/core/widgets/task_card_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,7 +13,9 @@ class HomePage extends StatelessWidget {
       ),
       body: const SingleChildScrollView(
         child: Column(
-          children: [],
+          children: [
+            TaskCardWidget()
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
