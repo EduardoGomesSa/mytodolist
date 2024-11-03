@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todas as músicas'),
+        title: const Text('Minhas Tarefas'),
       ),
       body: const SingleChildScrollView(child: Column(children: [],),),
     );

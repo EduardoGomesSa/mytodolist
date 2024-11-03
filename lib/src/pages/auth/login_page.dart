@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
+import 'package:mytodolist/src/core/services/validators.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 
 class LoginPage extends StatelessWidget {
@@ -34,8 +36,7 @@ class LoginPage extends StatelessWidget {
             ),
             decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius:
-                    BorderRadius.vertical(top: Radius.circular(45))),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
             child: Form(
               key: _formKey,
               child: Column(
@@ -45,19 +46,38 @@ class LoginPage extends StatelessWidget {
                     controller: emailTextController,
                     icon: Icons.email,
                     label: 'Email',
+                    validator: emailvalidator,
                   ),
                   TextFieldWidget(
                     controller: passwordTextController,
                     icon: Icons.lock,
                     label: 'Senha',
                     isSecret: true,
+                    validator: passwordValidator,
                   ),
                   SizedBox(
-                      height: 45,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('Entrar'),
-                      )),
+                      height: 50,
+                      child: GetX<AuthController>(builder: (controller) {
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12))),
+                          onPressed: controller.isLoading.value
+                              ? null
+                              : () {
+                                  FocusScope.of(context).unfocus();
+
+                                  if (_formKey.currentState!.validate()) {
+                                    controller.signIn(
+                                        email: emailTextController.text,
+                                        password: passwordTextController.text);
+                                  }
+                                },
+                          child: controller.isLoading.value
+                              ? const CircularProgressIndicator()
+                              : const Text('Entrar'),
+                        );
+                      })),
                   const Padding(
                     padding: EdgeInsets.only(bottom: 10, top: 15),
                     child: Row(children: [
