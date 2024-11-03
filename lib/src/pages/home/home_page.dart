@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mytodolist/src/core/widgets/task_add_modal.dart';
 import 'package:mytodolist/src/core/widgets/task_card_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,64 +14,26 @@ class HomePage extends StatelessWidget {
       ),
       body: const SingleChildScrollView(
         child: Column(
-          children: [
-            TaskCardWidget()
-          ],
+          children: [TaskCardWidget()],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-           showModalBottomSheet(
+          showModalBottomSheet(
             isScrollControlled: true,
             context: context,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
             ),
             builder: (BuildContext context) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  top: 16.0,
-                  left: 16.0,
-                  right: 16.0,
-                  bottom: MediaQuery.of(context).viewInsets.bottom + 16.0, // Ajusta o padding inferior ao teclado
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'Nova Tarefa',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 16),
-                    const TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Título',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    const TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Descrição',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Ação para salvar a tarefa
-                        Navigator.pop(context); // Fecha o modal após a ação
-                      },
-                      child: const Text('Salvar Tarefa'),
-                    ),
-                  ],
-                ),
-              );
+              return const TaskAddModal();
             },
           );
         },
-        
-        child: const Icon(Icons.add, color: Colors.black,),
+        child: const Icon(
+          Icons.add,
+          color: Colors.black,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
