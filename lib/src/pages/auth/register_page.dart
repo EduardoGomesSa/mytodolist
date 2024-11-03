@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
+import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
 import 'package:mytodolist/src/core/services/validators.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 
@@ -113,6 +114,37 @@ class RegisterPage extends StatelessWidget {
                             );
                           }),
                         ),
+                        const Padding(
+                    padding: EdgeInsets.only(bottom: 10, top: 15),
+                    child: Row(children: [
+                      Expanded(
+                          child: Divider(
+                        color: Colors.grey,
+                      )),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          'Ou',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      Expanded(
+                          child: Divider(
+                        color: Colors.grey,
+                      )),
+                    ]),
+                  ),
+                  SizedBox(
+                    height: 45,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.login);
+                      },
+                      style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.blue)),
+                      child: const Text('Já possui uma conta? Clique aqui para entrar'),
+                    ),
+                  ),
                       ],
                     ),
                   ),
@@ -124,7 +156,7 @@ class RegisterPage extends StatelessWidget {
               left: 10,
               child: IconButton(
                 onPressed: () {
-                  Get.toNamed('/login');
+                  Get.toNamed(AppRoutes.login);
                 },
                 icon: const Icon(Icons.arrow_back, color: Colors.black,),
               ),
