@@ -5,19 +5,13 @@ class TaskCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+    return const Card(
+      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
       color: Colors.blue,
       child: ListTile(
-        leading: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5)),
-          width: 25,
-          height: 25,
-        ),
-        title: const Text("Fazer caminhada"),
-        trailing: const Row(
+        leading: Icon(Icons.check_box_outline_blank_sharp, size: 30, color: Colors.white,),
+        title: Text("Fazer caminhada"),
+        trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
           Icon(Icons.edit, color: Colors.black,),
