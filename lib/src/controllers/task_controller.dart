@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
+import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
 import 'package:mytodolist/src/models/task_modal.dart';
 import 'package:mytodolist/src/repositories/task_repository.dart';
@@ -18,5 +19,12 @@ class TaskController extends GetxController {
   RxBool isLoading = false.obs;
   TaskModel task = TaskModel();
   RxList<TaskModel> listTask = RxList<TaskModel>([]);
-  
+
+  Future post() async {
+    isLoading.value = true;
+
+    String token = auth.user.token!;
+
+    ApiResult<TaskModel> result
+  }
 }
