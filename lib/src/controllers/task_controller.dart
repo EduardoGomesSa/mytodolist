@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
+import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
 import 'package:mytodolist/src/models/task_modal.dart';
@@ -25,6 +26,19 @@ class TaskController extends GetxController {
 
     String token = auth.user.token!;
 
-    ApiResult<TaskModel> result
+    ApiResult<TaskModel> result =
+        await repository.insert(token: token, task: task);
+
+    if (!result.isError) {
+      task = result.data!;
+
+      appUtils.showToast(message: "tarefa cadastrada com sucesso!");
+
+      //Get.offAllNamed(AppRoutes.home);
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+
+    isLoading.value = false;
   }
 }

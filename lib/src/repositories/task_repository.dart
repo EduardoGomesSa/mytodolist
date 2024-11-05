@@ -1,6 +1,5 @@
 import 'package:mytodolist/src/core/services/http_manager.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
-import 'package:mytodolist/src/core/utils/app_utils.dart';
 import 'package:mytodolist/src/core/utils/urls.dart';
 import 'package:mytodolist/src/models/task_modal.dart';
 
