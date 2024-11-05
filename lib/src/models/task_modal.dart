@@ -9,11 +9,11 @@ class TaskModel {
   List<ItemModel>? items;
 
   TaskModel({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.createdAt,
-    required this.status,
+    this.id,
+    this.name,
+    this.description,
+    this.createdAt,
+    this.status,
     this.items,
   });
 
