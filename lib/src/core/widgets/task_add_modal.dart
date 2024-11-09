@@ -14,7 +14,8 @@ class TaskAddModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return
+     SingleChildScrollView(
       child: Padding(
           padding: EdgeInsets.only(
             top: 16.0,
@@ -57,10 +58,10 @@ class TaskAddModal extends StatelessWidget {
                           ? null
                           : () {
                               FocusScope.of(context).unfocus();
-
+          
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-
+          
                                 controller.post();
                               }
                               //Navigator.pop(context);
