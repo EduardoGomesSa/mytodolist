@@ -18,14 +18,14 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            isScrollControlled: false,
+        onPressed: () async {
+          await showModalBottomSheet(
+            isScrollControlled: true,
             context: context,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
             ),
-            builder: (BuildContext context) {
+            builder: (context) {
               return TaskAddModal();
             },
           );
