@@ -10,7 +10,8 @@ class TaskAddModal extends StatelessWidget {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final controller = Get.find<TaskController>();
-  final FocusNode titleFocusNode = FocusNode(); // Define o FocusNode para o campo título
+  final FocusNode titleFocusNode =
+      FocusNode(); // Define o FocusNode para o campo título
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +68,7 @@ class TaskAddModal extends StatelessWidget {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
                               controller.post();
+                              Navigator.of(context).pop();
                             }
                           },
                     child: controller.isLoading.value
