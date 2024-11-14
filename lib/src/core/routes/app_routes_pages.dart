@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mytodolist/src/bindings/app_binding.dart';
 import 'package:mytodolist/src/bindings/task_binding.dart';
 import 'package:mytodolist/src/pages/auth/login_page.dart';
 import 'package:mytodolist/src/pages/auth/register_page.dart';
@@ -10,7 +11,10 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.home,
       page: () => const HomePage(),
-      binding: TaskBinding(),
+      bindings: [
+        AppBinding(),
+        TaskBinding()
+      ],
     ),
     GetPage(
       name: AppRoutes.login,

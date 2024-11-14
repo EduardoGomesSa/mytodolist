@@ -36,7 +36,7 @@ class TaskModel {
             map['description'] != null ? map['description'] as String : null,
         status: map['status'] != null ? map['status'] as String : null,
         createdAt: map['created_at'] != null
-            ? DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int)
+            ? DateTime.parse(map['created_at'] as String)
             : null,
         items: map['items'] != null
             ? List<ItemModel>.from((map['items'] as List<dynamic>)

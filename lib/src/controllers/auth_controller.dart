@@ -68,6 +68,8 @@ class AuthController extends GetxController {
         appUtils.showToast(message: result.message!, isError: true);
         Get.offAllNamed(AppRoutes.login);
       }
+    } else {
+      Get.offAllNamed(AppRoutes.login);
     }
   }
 
@@ -79,4 +81,10 @@ class AuthController extends GetxController {
 
     Get.offAllNamed(AppRoutes.login);
   }
+
+  // Future getUser() async {
+  //   isLoading.value = true;
+  //   user = auth.user;
+
+  // }
 }
