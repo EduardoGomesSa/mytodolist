@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                 return ListView.builder(
                     itemCount: taskController.listTask.length,
                     itemBuilder: (_, index) {
-                      return TaskCardWidget(task: taskController.listTask[index]);
+                      return TaskCardWidget(task: taskController.listTask[index], controller: taskController,);
                     });
               },
             ),

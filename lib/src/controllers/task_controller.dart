@@ -62,4 +62,6 @@ class TaskController extends GetxController {
 
     isLoading.value = false;
   }
+
+  
 }
