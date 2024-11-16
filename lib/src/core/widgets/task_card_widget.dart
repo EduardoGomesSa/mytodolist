@@ -8,25 +8,38 @@ class TaskCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Card(
+    return Card(
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
-      color: Colors.blue,
+      color: task.status == "ativo"
+          ? Colors.blue
+          : const Color.fromARGB(255, 149, 204, 229),
       child: ListTile(
-        leading: const Icon(
-          Icons.check_box_outline_blank_sharp,
+        leading: Icon(
+          task.status == "ativo"
+              ? Icons.check_box_outline_blank_sharp
+              : Icons.check_box_outlined,
           size: 30,
           color: Colors.white,
         ),
-        title: Text(task.name.toString()),
-        trailing: const Row(
+        title: Text(
+          task.name.toString(),
+          style: TextStyle(
+            color: task.status == "ativo" ? Colors.black : Colors.black38,
+            decoration: task.status == "ativo" ? TextDecoration.none : TextDecoration.lineThrough
+          ),
+        ),
+        trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.edit,
-              color: Colors.black,
-            ),
-            SizedBox(width: 10),
-            Icon(Icons.delete, color: Colors.black)
+            task.status == "ativo"
+                ? const Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                  )
+                : const SizedBox.shrink(),
+            const SizedBox(width: 10),
+            Icon(Icons.delete,
+                color: task.status == "ativo" ? Colors.black : Colors.black38)
           ],
         ),
       ),
