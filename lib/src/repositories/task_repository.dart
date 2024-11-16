@@ -58,4 +58,23 @@ class TaskRepository {
       return ApiResult<TaskModel>(message: message, isError: true);
     }
   }
+
+  Future<ApiResult<bool>> changeStatus(
+      {required String token, required int id, required String status}) async {
+    const String endpoint = "${Url.base}/tasks/status";
+
+    final Map<String, dynamic> body = {'id': id, 'status': status};
+
+    final response = await httpManager.request(
+        url: endpoint,
+        method: HttpMethods.put,
+        body: body,
+        headers: {'Authorization': 'Bearer $token'});
+
+    if (response['status'] == 200) {
+      return ApiResult<bool>(data: true);
+    }
+
+    return ApiResult<bool>(message: "Status da tarefa não foi atualizado", isError: true);
+  }
 }

@@ -23,7 +23,7 @@ class TaskController extends GetxController {
   @override
   void onInit() {
     getAll();
-    
+
     super.onInit();
   }
 
@@ -54,8 +54,6 @@ class TaskController extends GetxController {
       task = result.data!;
 
       appUtils.showToast(message: "tarefa cadastrada com sucesso!");
-
-      //Get.offAllNamed(AppRoutes.home);
     } else {
       appUtils.showToast(message: result.message!, isError: result.isError);
     }
@@ -63,5 +61,23 @@ class TaskController extends GetxController {
     isLoading.value = false;
   }
 
-  
+  Future changeStatus({required String status}) async {
+    isLoading.value = true;
+
+    String token = auth.user.token!;
+
+    ApiResult<bool> result = await repository.changeStatus(
+      token: token,
+      id: auth.user.id!,
+      status: status,
+    );
+
+    if (result.data!) {
+      await getAll();
+
+      appUtils.showToast(message: "status da tarefa atualizado com sucesso!");
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+  }
 }
