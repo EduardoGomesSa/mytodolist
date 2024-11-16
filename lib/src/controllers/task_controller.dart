@@ -61,23 +61,25 @@ class TaskController extends GetxController {
     isLoading.value = false;
   }
 
-  Future changeStatus({required String status}) async {
+  Future changeStatus({required String status, required int id}) async {
     isLoading.value = true;
 
     String token = auth.user.token!;
 
     ApiResult<bool> result = await repository.changeStatus(
       token: token,
-      id: auth.user.id!,
+      id: id,
       status: status,
     );
 
-    if (result.data!) {
+    if (result.data != null && result.data!) {
       await getAll();
 
       appUtils.showToast(message: "status da tarefa atualizado com sucesso!");
     } else {
       appUtils.showToast(message: result.message!, isError: result.isError);
     }
+
+    isLoading.value = false;
   }
 }

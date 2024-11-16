@@ -17,7 +17,7 @@ class TaskCardWidget extends StatelessWidget {
           : const Color.fromARGB(255, 149, 204, 229),
       child: ListTile(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => controller.changeStatus(id: task.id!, status: task.status == "ativo" ? "inativo" : "ativo"),
           icon: Icon(
             task.status == "ativo"
                 ? Icons.check_box_outline_blank_sharp

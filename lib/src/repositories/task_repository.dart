@@ -71,7 +71,7 @@ class TaskRepository {
         body: body,
         headers: {'Authorization': 'Bearer $token'});
 
-    if (response['status'] == 200) {
+    if (response['message'] != null) {
       return ApiResult<bool>(data: true);
     }
 
