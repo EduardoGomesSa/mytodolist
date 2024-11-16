@@ -23,8 +23,11 @@ class HomePage extends StatelessWidget {
             if (taskController.isLoading.value) {
               return const CircularProgressIndicator();
             } else if (taskController.listTask.isEmpty) {
-              return const Center(
-                child: Text("Nenhuma tarefa cadastrada"),
+              return const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(child: Text("Nenhuma tarefa cadastrada")),
+                ],
               );
             }
 
