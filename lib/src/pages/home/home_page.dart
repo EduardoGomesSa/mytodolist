@@ -26,7 +26,9 @@ class HomePage extends StatelessWidget {
               return const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Center(child: Text("Nenhuma tarefa cadastrada")),
+                  Icon(Icons.task, size: 60),
+                  SizedBox(height: 15),
+                  Center(child: Text("Nenhuma tarefa cadastrada", style: TextStyle(fontSize: 18))),
                 ],
               );
             }
