@@ -20,6 +20,28 @@ class TaskController extends GetxController {
   TaskModel task = TaskModel();
   RxList<TaskModel> listTask = RxList<TaskModel>([]);
 
+  @override
+  void onInit() {
+    getAll();
+    
+    super.onInit();
+  }
+
+  Future getAll() async {
+    isLoading.value = true;
+    String token = auth.user.token!;
+
+    ApiResult<List<TaskModel>> result = await repository.getAll(token: token);
+
+    if (!result.isError) {
+      listTask.assignAll(result.data!);
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+
+    isLoading.value = false;
+  }
+
   Future post() async {
     isLoading.value = true;
 

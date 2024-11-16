@@ -44,4 +44,8 @@ class TaskModel {
                     (e) => ItemModel.fromMap(e as Map<String, dynamic>)))
             : null);
   }
+
+  static List<TaskModel> fromList(list) {
+    return List<TaskModel>.from(list.map((x) => TaskModel.fromMap(x)));
+  }
 }

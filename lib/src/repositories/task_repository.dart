@@ -10,6 +10,28 @@ class TaskRepository {
     required this.httpManager,
   });
 
+  Future<ApiResult<List<TaskModel>>> getAll({required String token}) async {
+    const String endpoint = "${Url.base}/tasks";
+
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.get,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response['data'] != null) {
+      List<TaskModel> listTasks = TaskModel.fromList(response['data'] as List);
+
+      return ApiResult<List<TaskModel>>(data: listTasks);
+    } else {
+      String message = response['error'] ??
+          "Não foi possível buscar as tarefas. Tente novamente!";
+      return ApiResult<List<TaskModel>>(message: message, isError: true);
+    }
+  }
+
   Future<ApiResult<TaskModel>> insert(
       {required String token, TaskModel? task}) async {
     const String endpoint = "${Url.base}/tasks";

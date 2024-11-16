@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/task_add_modal.dart';
@@ -16,30 +17,34 @@ class HomePage extends StatelessWidget {
         title: const Text('Minhas Tarefas'),
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.person))],
       ),
-      body: SingleChildScrollView(
-        child: GetX<TaskController>(
-          init: taskController,
-          builder: (controller) {
-            if (taskController.isLoading.value) {
-              return const CircularProgressIndicator();
-            } else if (taskController.listTask.isEmpty) {
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.task, size: 60),
-                  SizedBox(height: 15),
-                  Center(child: Text("Nenhuma tarefa cadastrada", style: TextStyle(fontSize: 18))),
-                ],
-              );
-            }
-
-            return ListView.builder(
-                itemCount: taskController.listTask.length,
-                itemBuilder: (_, index) {
-                  return TaskCardWidget(task: taskController.listTask[index]);
-                });
-          },
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: GetX<TaskController>(
+              init: taskController,
+              builder: (controller) {
+                if (taskController.isLoading.value) {
+                  return const CircularProgressIndicator();
+                } else if (taskController.listTask.isEmpty) {
+                  return const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.task, size: 60),
+                      SizedBox(height: 15),
+                      Center(child: Text("Nenhuma tarefa cadastrada", style: TextStyle(fontSize: 18))),
+                    ],
+                  );
+                }
+            
+                return ListView.builder(
+                    itemCount: taskController.listTask.length,
+                    itemBuilder: (_, index) {
+                      return TaskCardWidget(task: taskController.listTask[index]);
+                    });
+              },
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
