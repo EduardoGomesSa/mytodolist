@@ -39,7 +39,7 @@ class AppUtils {
       msg: message,
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.TOP,
-      timeInSecForIosWeb: 4,
+      timeInSecForIosWeb: 2,
       backgroundColor: isError ? Colors.red : Colors.green,
       textColor: isError ? Colors.white : Colors.black,
       fontSize: 18,
