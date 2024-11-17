@@ -19,9 +19,9 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
-    validateToken();
-
     super.onInit();
+
+    validateToken();
   }
 
   Future signUp() async {
