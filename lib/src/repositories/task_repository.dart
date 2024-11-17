@@ -72,7 +72,7 @@ class TaskRepository {
         headers: {'Authorization': 'Bearer $token'});
 
     if (response['message'] != null) {
-      return ApiResult<bool>(data: true);
+      return ApiResult<bool>(message: "status da tarefa atualizado com sucesso!");
     }
 
     return ApiResult<bool>(
@@ -97,7 +97,7 @@ class TaskRepository {
     );
 
     if (response['message'] != null) {
-      return ApiResult<bool>(data: true);
+      return ApiResult<bool>(message: "Tarefa excluída com sucesso");
     }
 
     return ApiResult<bool>(

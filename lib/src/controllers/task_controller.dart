@@ -72,10 +72,26 @@ class TaskController extends GetxController {
       status: status,
     );
 
-    if (result.data != null && result.data!) {
+    if (!result.isError) {
       await getAll();
 
-      appUtils.showToast(message: "status da tarefa atualizado com sucesso!");
+      appUtils.showToast(message: result.message!);
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+
+    isLoading.value = false;
+  }
+
+  Future delete({required int id}) async {
+    isLoading.value = true;
+
+    String token = auth.user.token!;
+
+    ApiResult<bool> result = await repository.delete(token: token, id: id);
+
+    if (!result.isError) {
+      appUtils.showToast(message: result.message!);
     } else {
       appUtils.showToast(message: result.message!, isError: result.isError);
     }
