@@ -42,7 +42,7 @@ class TaskAddModal extends StatelessWidget {
                 label: "Título",
                 icon: Icons.title,
                 controller: titleController,
-                focusNode: titleFocusNode, // Associa o FocusNode ao campo
+                focusNode: titleFocusNode,
                 onSaved: (value) {
                   controller.task.name = value;
                 },

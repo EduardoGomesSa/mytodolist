@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
+import 'package:mytodolist/src/core/widgets/task_add_modal.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskCardWidget extends StatelessWidget {
-  const TaskCardWidget(
-      {super.key, required this.task, required this.controller});
+  const TaskCardWidget({
+    super.key,
+    required this.task,
+    required this.controller,
+  });
 
   final TaskModel task;
   final TaskController controller;
@@ -41,18 +45,26 @@ class TaskCardWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             task.status == "ativo"
-                ? const Icon(
-                    Icons.edit,
-                    color: Colors.black,
-                  )
+                ? IconButton(
+                    onPressed: () => showBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return TaskAddModal();
+                          },
+                        ),
+                    icon: const Icon(
+                      Icons.edit,
+                      color: Colors.black,
+                    ))
                 : const SizedBox.shrink(),
             const SizedBox(width: 10),
             IconButton(
-                onPressed: () => controller.delete(id: task.id!),
-                icon: Icon(Icons.delete,
-                    color: task.status == "ativo"
-                        ? Colors.black
-                        : Colors.black38,),),
+              onPressed: () => controller.delete(id: task.id!),
+              icon: Icon(
+                Icons.delete,
+                color: task.status == "ativo" ? Colors.black : Colors.black38,
+              ),
+            ),
           ],
         ),
       ),
