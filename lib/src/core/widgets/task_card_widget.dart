@@ -3,7 +3,8 @@ import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskCardWidget extends StatelessWidget {
-  const TaskCardWidget({super.key, required this.task, required this.controller});
+  const TaskCardWidget(
+      {super.key, required this.task, required this.controller});
 
   final TaskModel task;
   final TaskController controller;
@@ -17,7 +18,9 @@ class TaskCardWidget extends StatelessWidget {
           : const Color.fromARGB(255, 149, 204, 229),
       child: ListTile(
         leading: IconButton(
-          onPressed: () => controller.changeStatus(id: task.id!, status: task.status == "ativo" ? "inativo" : "ativo"),
+          onPressed: () => controller.changeStatus(
+              id: task.id!,
+              status: task.status == "ativo" ? "inativo" : "ativo"),
           icon: Icon(
             task.status == "ativo"
                 ? Icons.check_box_outline_blank_sharp
@@ -44,8 +47,12 @@ class TaskCardWidget extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
             const SizedBox(width: 10),
-            Icon(Icons.delete,
-                color: task.status == "ativo" ? Colors.black : Colors.black38)
+            IconButton(
+                onPressed: () => controller.delete(id: task.id!),
+                icon: Icon(Icons.delete,
+                    color: task.status == "ativo"
+                        ? Colors.black
+                        : Colors.black38,),),
           ],
         ),
       ),
