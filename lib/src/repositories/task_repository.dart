@@ -75,6 +75,32 @@ class TaskRepository {
       return ApiResult<bool>(data: true);
     }
 
-    return ApiResult<bool>(message: "Status da tarefa não foi atualizado", isError: true);
+    return ApiResult<bool>(
+        message: "Status da tarefa não foi atualizado", isError: true);
+  }
+
+  Future<ApiResult<bool>> delete({
+    required String token,
+    required int id,
+  }) async {
+    const String endpoint = "${Url.base}/tasks";
+
+    Map<String, dynamic> body = {'id': id};
+
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.delete,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response['message'] != null) {
+      return ApiResult<bool>(data: true);
+    }
+
+    return ApiResult<bool>(
+        message: "Não foi possível apagar esta tarefa. Tente novamente", isError: true);
   }
 }
