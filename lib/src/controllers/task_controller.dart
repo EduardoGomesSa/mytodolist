@@ -51,7 +51,7 @@ class TaskController extends GetxController {
         await repository.insert(token: token, task: task);
 
     if (!result.isError) {
-      task = result.data!;
+      await getAll();
 
       appUtils.showToast(message: "tarefa cadastrada com sucesso!");
     } else {
