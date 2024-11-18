@@ -31,15 +31,31 @@ class HomePage extends StatelessWidget {
                     children: [
                       Icon(Icons.task, size: 60),
                       SizedBox(height: 15),
-                      Center(child: Text("Nenhuma tarefa cadastrada", style: TextStyle(fontSize: 18))),
+                      Center(
+                          child: Text("Nenhuma tarefa cadastrada",
+                              style: TextStyle(fontSize: 18))),
                     ],
                   );
                 }
-            
+
                 return ListView.builder(
                     itemCount: taskController.listTask.length,
                     itemBuilder: (_, index) {
-                      return TaskCardWidget(task: taskController.listTask[index], controller: taskController);
+                      return TaskCardWidget(
+                        task: taskController.listTask[index],
+                        controller: taskController,
+                        onShowModalEditTask: () => showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.vertical(top: Radius.circular(25)),
+                          ),
+                          builder: (context) {
+                            return TaskAddModal();
+                          },
+                        ),
+                      );
                     });
               },
             ),

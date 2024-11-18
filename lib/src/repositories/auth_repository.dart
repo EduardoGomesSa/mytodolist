@@ -65,10 +65,13 @@ class AuthRepository {
   Future<ApiResult<UserModel>> validateToken(String token) async {
     const String endpoint = "${Url.base}/validate-token";
 
-    final response = await httpManager
-        .request(url: endpoint, method: HttpMethods.post, headers: {
-      'Authorization': 'Bearer $token',
-    });
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.post,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
 
     if (response['data'] != null) {
       UserModel user = UserModel.fromMap(response['data']);

@@ -8,10 +8,12 @@ class TaskCardWidget extends StatelessWidget {
     super.key,
     required this.task,
     required this.controller,
+    required this.onShowModalEditTask,
   });
 
   final TaskModel task;
   final TaskController controller;
+  final VoidCallback onShowModalEditTask;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +48,7 @@ class TaskCardWidget extends StatelessWidget {
           children: [
             task.status == "ativo"
                 ? IconButton(
-                    onPressed: () => showBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return TaskAddModal();
-                          },
-                        ),
+                    onPressed: onShowModalEditTask,
                     icon: const Icon(
                       Icons.edit,
                       color: Colors.black,
