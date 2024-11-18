@@ -4,15 +4,38 @@ import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
-class TaskAddModal extends StatelessWidget {
+class TaskAddModal extends StatefulWidget {
   TaskAddModal({super.key, this.task});
 
+  final TaskModel? task;
+
+  @override
+  State<TaskAddModal> createState() => _TaskAddModalState();
+}
+
+class _TaskAddModalState extends State<TaskAddModal> {
   final _formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController();
-  final descriptionController = TextEditingController();
+  var titleController = TextEditingController();
+  var descriptionController = TextEditingController();
   final controller = Get.find<TaskController>();
   final FocusNode titleFocusNode = FocusNode();
-  final TaskModel? task;
+
+  @override
+  void initState() {
+    super.initState();
+
+    titleController = TextEditingController(text: widget.task?.name ?? '');
+    titleController =
+        TextEditingController(text: widget.task?.description ?? '');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    titleController.dispose();
+    descriptionController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +56,10 @@ class TaskAddModal extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text( task == null ? 
-                'Nova Tarefa' : task!.name!,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Text(
+                widget.task == null ? 'Nova Tarefa' : 'Editar Tarefa',
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               TextFieldWidget(
