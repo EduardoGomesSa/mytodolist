@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
+import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskAddModal extends StatelessWidget {
-  TaskAddModal({super.key});
+  TaskAddModal({super.key, this.task});
 
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final controller = Get.find<TaskController>();
-  final FocusNode titleFocusNode =
-      FocusNode(); // Define o FocusNode para o campo título
+  final FocusNode titleFocusNode = FocusNode();
+  final TaskModel? task;
 
   @override
   Widget build(BuildContext context) {
-    // Força o foco no campo de título assim que o modal é exibido
     WidgetsBinding.instance.addPostFrameCallback((_) {
       FocusScope.of(context).requestFocus(titleFocusNode);
     });
@@ -33,8 +33,8 @@ class TaskAddModal extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Nova Tarefa',
+              Text( task == null ? 
+                'Nova Tarefa' : task!.name!,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),

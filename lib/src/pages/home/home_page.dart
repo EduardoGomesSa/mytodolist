@@ -48,11 +48,12 @@ class HomePage extends StatelessWidget {
                           isScrollControlled: true,
                           context: context,
                           shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(25)),
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(25),
+                            ),
                           ),
                           builder: (context) {
-                            return TaskAddModal();
+                            return TaskAddModal(task: taskController.listTask[index]);
                           },
                         ),
                       );

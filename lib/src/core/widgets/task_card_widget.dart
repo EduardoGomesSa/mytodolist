@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
-import 'package:mytodolist/src/core/widgets/task_add_modal.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskCardWidget extends StatelessWidget {
