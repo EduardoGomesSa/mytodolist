@@ -15,8 +15,8 @@ class TaskAddModal extends StatefulWidget {
 
 class _TaskAddModalState extends State<TaskAddModal> {
   final _formKey = GlobalKey<FormState>();
-  var titleController = TextEditingController();
-  var descriptionController = TextEditingController();
+  late TextEditingController titleController;
+  late TextEditingController descriptionController;
   final controller = Get.find<TaskController>();
   final FocusNode titleFocusNode = FocusNode();
 
@@ -24,8 +24,8 @@ class _TaskAddModalState extends State<TaskAddModal> {
   void initState() {
     super.initState();
 
-    titleController = TextEditingController(text: widget.task?.name  != '' ? widget.task?.name : '');
-    titleController =
+    titleController = TextEditingController(text: widget.task?.name ?? '');
+    descriptionController =
         TextEditingController(text: widget.task?.description ?? '');
   }
 
