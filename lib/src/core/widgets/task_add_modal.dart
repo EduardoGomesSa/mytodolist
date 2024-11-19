@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
@@ -84,6 +86,11 @@ class _TaskAddModalState extends State<TaskAddModal> {
               SizedBox(
                 child: GetX<TaskController>(builder: (controller) {
                   return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      )
+                    ),
                     onPressed: controller.isLoading.value
                         ? null
                         : () {
@@ -97,7 +104,15 @@ class _TaskAddModalState extends State<TaskAddModal> {
                           },
                     child: controller.isLoading.value
                         ? const CircularProgressIndicator()
-                        :  Text(widget.task == null ? 'Salvar Tarefa' : 'Editar Tarefa'),
+                        : SizedBox(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                            child: Center(
+                              child: Text(widget.task == null
+                                  ? 'Salvar Tarefa'
+                                  : 'Editar Tarefa'),
+                            ),
+                          ),
                   );
                 }),
               ),
