@@ -24,7 +24,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
   void initState() {
     super.initState();
 
-    titleController = TextEditingController(text: widget.task?.name ?? '');
+    titleController = TextEditingController(text: widget.task?.name  != '' ? widget.task?.name : '');
     titleController =
         TextEditingController(text: widget.task?.description ?? '');
   }
@@ -97,7 +97,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
                           },
                     child: controller.isLoading.value
                         ? const CircularProgressIndicator()
-                        : const Text('Salvar Tarefa'),
+                        :  Text(widget.task == null ? 'Salvar Tarefa' : 'Editar Tarefa'),
                   );
                 }),
               ),
