@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
             ),
             builder: (context) {
-              return TaskAddModal();
+              return const TaskAddModal();
             },
           );
         },

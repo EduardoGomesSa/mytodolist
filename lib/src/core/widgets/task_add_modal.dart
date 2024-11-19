@@ -5,7 +5,7 @@ import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskAddModal extends StatefulWidget {
-  TaskAddModal({super.key, this.task});
+  const TaskAddModal({super.key, this.task});
 
   final TaskModel? task;
 
