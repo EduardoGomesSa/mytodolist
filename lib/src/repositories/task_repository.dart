@@ -1,6 +1,7 @@
 import 'package:mytodolist/src/core/services/http_manager.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/urls.dart';
+import 'package:mytodolist/src/core/widgets/task_add_modal.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskRepository {
@@ -33,10 +34,10 @@ class TaskRepository {
   }
 
   Future<ApiResult<TaskModel>> insert(
-      {required String token, TaskModel? task}) async {
+      {required String token, required TaskModel task}) async {
     const String endpoint = "${Url.base}/tasks";
 
-    Map<String, dynamic> body = task!.toMap();
+    Map<String, dynamic> body = task.toMap();
 
     final response = await httpManager.request(
       url: endpoint,
@@ -59,6 +60,28 @@ class TaskRepository {
     }
   }
 
+  Future<ApiResult<bool>> update(
+      {required String token, required TaskModel task}) async {
+    const String endpoint = "${Url.base}/tasks";
+
+    Map<String, dynamic> body = task.toMap();
+
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.put,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response['message'] != null) {
+      return ApiResult<bool>(message: "Tarefa atualizada com sucesso!");
+    }
+
+    return ApiResult<bool>(message: "Tarefa não foi atualizada. Tente novamente!", isError: true);
+  }
+
   Future<ApiResult<bool>> changeStatus(
       {required String token, required int id, required String status}) async {
     const String endpoint = "${Url.base}/tasks/status";
@@ -72,7 +95,8 @@ class TaskRepository {
         headers: {'Authorization': 'Bearer $token'});
 
     if (response['message'] != null) {
-      return ApiResult<bool>(message: "status da tarefa atualizado com sucesso!");
+      return ApiResult<bool>(
+          message: "status da tarefa atualizado com sucesso!");
     }
 
     return ApiResult<bool>(
@@ -101,6 +125,7 @@ class TaskRepository {
     }
 
     return ApiResult<bool>(
-        message: "Não foi possível apagar esta tarefa. Tente novamente", isError: true);
+        message: "Não foi possível apagar esta tarefa. Tente novamente",
+        isError: true);
   }
 }
