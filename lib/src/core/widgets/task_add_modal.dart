@@ -85,10 +85,8 @@ class _TaskAddModalState extends State<TaskAddModal> {
                 child: GetX<TaskController>(builder: (controller) {
                   return ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)
-                      )
-                    ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15))),
                     onPressed: controller.isLoading.value
                         ? null
                         : () {
@@ -96,15 +94,20 @@ class _TaskAddModalState extends State<TaskAddModal> {
 
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              controller.post();
+                              if (widget.task == null) {
+                                controller.post();
+                              } else {
+                                controller.task.id = widget.task!.id;
+                                controller.renew();
+                              }
                               Navigator.of(context).pop();
                             }
                           },
                     child: controller.isLoading.value
                         ? const CircularProgressIndicator()
                         : SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
                             child: Center(
                               child: Text(widget.task == null
                                   ? 'Salvar Tarefa'
