@@ -83,6 +83,24 @@ class TaskController extends GetxController {
     isLoading.value = false;
   }
 
+  Future renew() async {
+    isLoading.value = true;
+
+    String token = auth.user.token!;
+
+    ApiResult<bool> result = await repository.update(token: token, task: task);
+
+    if (!result.isError) {
+      await getAll();
+
+      appUtils.showToast(message: result.message!);
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+
+    isLoading.value = false;
+  }
+
   Future delete({required int id}) async {
     isLoading.value = true;
 

@@ -1,7 +1,6 @@
 import 'package:mytodolist/src/core/services/http_manager.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/urls.dart';
-import 'package:mytodolist/src/core/widgets/task_add_modal.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskRepository {
