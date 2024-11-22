@@ -19,7 +19,7 @@ class TaskCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => TaskPage())),
+          .push(MaterialPageRoute(builder: (context) => TaskPage(model: task))),
       child: Card(
         margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
         color: task.status == "ativo"
