@@ -10,7 +10,7 @@ class AppUtils {
     required String data,
   }) async {
     final SharedPreferences storage = await SharedPreferences.getInstance();
-    return storage.getString(key);
+    await storage.setString(key, data);
   }
 
   Future<String?> getLocalData({required String key}) async {
