@@ -5,10 +5,10 @@ class ItemModel {
   String? status;
 
   ItemModel({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.status,
+    this.id,
+    this.name,
+    this.description,
+    this.status,
   });
 
   Map<String, dynamic> toMap() {
