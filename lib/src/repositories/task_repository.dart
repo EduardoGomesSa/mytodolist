@@ -53,7 +53,7 @@ class TaskRepository {
       return ApiResult<TaskModel>(data: model);
     } else {
       String message = response['error'] ??
-          'Não foi possível cadastrar a tarefa, Tente novamente!';
+          'Não foi possível cadastrar a tarefa. Tente novamente!';
 
       return ApiResult<TaskModel>(message: message, isError: true);
     }
