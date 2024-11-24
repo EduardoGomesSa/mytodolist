@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
               init: taskController,
               builder: (controller) {
                 if (taskController.isLoading.value) {
-                  return const CircularProgressIndicator();
+                  return  const Center(child: CircularProgressIndicator());
                 } else if (taskController.listTask.isEmpty) {
                   return const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
