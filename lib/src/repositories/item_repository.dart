@@ -58,4 +58,33 @@ class ItemRepository {
     return ApiResult(
         message: "Erro ao atualizar item. Tente novamente!", isError: true);
   }
+
+  Future<ApiResult<bool>> delete({
+    required String token,
+    required int id,
+  }) async {
+    const String endpoint = "${Url.base}/items";
+
+    Map<String, dynamic> body = {
+      'id': id,
+    };
+
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.delete,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response['message'] != null) {
+      return ApiResult<bool>(message: "Item excluído com sucesso!");
+    }
+
+    return ApiResult<bool>(
+      message: "Erro ao tentar apagar item. Tente novamente!",
+      isError: true,
+    );
+  }
 }
