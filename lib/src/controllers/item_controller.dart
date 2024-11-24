@@ -35,4 +35,18 @@ class ItemController extends GetxController {
 
     isLoading.value = false;
   }
+
+  Future renew({required int taskId}) async {
+    String token = auth.user.token!;
+
+    isLoading.value = true;
+
+    ApiResult<bool> result = await repository.update(token: token, model: item);
+
+    if (!result.isError) {
+      await taskRepository.getById(token: token, id: 1);
+    }
+
+    isLoading.value = false;
+  }
 }
