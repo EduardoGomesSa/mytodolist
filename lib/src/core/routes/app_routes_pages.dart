@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:mytodolist/src/bindings/item_binding.dart';
 import 'package:mytodolist/src/bindings/profile_binding.dart';
 import 'package:mytodolist/src/bindings/task_binding.dart';
 import 'package:mytodolist/src/pages/auth/login_page.dart';
@@ -14,6 +15,7 @@ abstract class AppPages {
       bindings: [
         TaskBinding(),
         ProfileBinding(),
+        ItemBinding(),
       ],
     ),
     GetPage(
@@ -27,8 +29,7 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.splash,
       page: () => const SplashPage(),
-    ),
-    
+    )
   ];
 }
 

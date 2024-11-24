@@ -12,7 +12,7 @@ class ItemAddModal extends StatefulWidget {
 
 class _ItemAddModalState extends State<ItemAddModal> {
   final _formKey = GlobalKey<FormState>();
-  late TextEditingController titleController;
+  TextEditingController titleController = TextEditingController();
   final controller = Get.find<ItemController>();
   final FocusNode titleFocusNode = FocusNode();
   @override
@@ -38,6 +38,7 @@ class _ItemAddModalState extends State<ItemAddModal> {
               TextFieldWidget(
                 label: "Nome",
                 icon: Icons.abc,
+                focusNode: titleFocusNode,
                 controller: titleController,
                 onSaved: (value) {
                   controller.item.name = value;
