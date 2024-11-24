@@ -57,8 +57,31 @@ class ItemController extends GetxController {
 
     ApiResult<bool> result = await repository.delete(token: token, id: id);
 
-    if(!result.isError) {
+    if (!result.isError) {
       await taskRepository.getById(token: token, id: 1);
     }
+
+    isLoading.value = false;
+  }
+
+  Future changeStatus({
+    required int id,
+    required String status,
+  }) async {
+    String token = auth.user.token!;
+
+    isLoading.value = true;
+
+    ApiResult<bool> result = await repository.changeStatus(
+      token: token,
+      id: id,
+      status: status,
+    );
+
+    if (!result.isError) {
+      await taskRepository.getById(token: token, id: 1);
+    }
+
+    isLoading.value = false;
   }
 }
