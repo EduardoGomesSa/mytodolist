@@ -28,6 +28,7 @@ abstract class AppPages {
       name: AppRoutes.splash,
       page: () => const SplashPage(),
     ),
+    
   ];
 }
 
