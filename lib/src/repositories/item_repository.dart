@@ -35,4 +35,27 @@ class ItemRepository {
         message: "Não foi possível cadastrar o item. Tente novamente!",
         isError: true);
   }
+
+  Future<ApiResult<bool>> update(
+      {required String token, required ItemModel model}) async {
+    const String endpoint = "${Url.base}/items";
+
+    Map<String, dynamic> body = model.toMap();
+
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.put,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response['message'] != null) {
+      return ApiResult<bool>(message: "Item atualizado com sucesso!");
+    }
+
+    return ApiResult(
+        message: "Erro ao atualizar item. Tente novamente!", isError: true);
+  }
 }
