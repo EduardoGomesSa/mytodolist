@@ -32,6 +32,33 @@ class TaskRepository {
     }
   }
 
+  Future<ApiResult<TaskModel>> getById({
+    required String token,
+    required int id,
+  }) async {
+    const String endpoint = "${Url.base}tasks/byid";
+
+    Map<String, dynamic> body = {
+      'id': id,
+    };
+
+    final response = await httpManager
+        .request(url: endpoint, method: HttpMethods.get, body: body, headers: {
+      'Authorization': 'Bearer $token',
+    });
+
+    if (response['data'] != null) {
+      TaskModel task = TaskModel.fromMap(response['data']);
+
+      return ApiResult<TaskModel>(data: task);
+    }
+
+    return ApiResult<TaskModel>(
+      message: "Não foi possível buscar esta tarefa. Tente novamente",
+      isError: true,
+    );
+  }
+
   Future<ApiResult<TaskModel>> insert(
       {required String token, required TaskModel task}) async {
     const String endpoint = "${Url.base}/tasks";
@@ -78,7 +105,8 @@ class TaskRepository {
       return ApiResult<bool>(message: "Tarefa atualizada com sucesso!");
     }
 
-    return ApiResult<bool>(message: "Tarefa não foi atualizada. Tente novamente!", isError: true);
+    return ApiResult<bool>(
+        message: "Tarefa não foi atualizada. Tente novamente!", isError: true);
   }
 
   Future<ApiResult<bool>> changeStatus(
