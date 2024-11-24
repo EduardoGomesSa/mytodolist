@@ -87,4 +87,35 @@ class ItemRepository {
       isError: true,
     );
   }
+
+  Future<ApiResult<bool>> changeStatus({
+    required String token,
+    required int id,
+    required String status,
+  }) async {
+    const String endpoint = "${Url.base}/items/status";
+
+    Map<String, dynamic> body = {
+      'id': id,
+      'status': status,
+    };
+
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.put,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response['message'] != null) {
+      return ApiResult<bool>(message: "Status do item alterado com sucesso");
+    }
+
+    return ApiResult(
+      message: "Erro ao tentar mudar status do item. Tente novamente",
+      isError: true,
+    );
+  }
 }
