@@ -47,7 +47,12 @@ class TaskController extends GetxController {
     isLoading.value = true;
     String token = auth.user.token!;
 
-    ApiResult<ItemModel> result = await repository.ge
+    ApiResult<TaskModel> result =
+        await repository.getById(token: token, id: task.id!);
+
+    if (!result.isError) {
+      task = result.data!;
+    }
   }
 
   Future post() async {
