@@ -24,10 +24,53 @@ class TaskPage extends StatelessWidget {
             child: Column(
               children: [
                 const Text("TAREFA"),
-                TaskCardWidget(
-                    task: model,
-                    controller: controller,
-                    onShowModalEditTask: () {}),
+                ListTile(
+                  leading: IconButton(
+                    onPressed: () => controller.changeStatus(
+                        id: model.id!,
+                        status: model.status == "ativo" ? "inativo" : "ativo"),
+                    icon: Icon(
+                      model.status == "ativo"
+                          ? Icons.check_box_outline_blank_sharp
+                          : Icons.check_box_outlined,
+                      size: 30,
+                    ),
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    model.name.toString(),
+                    style: TextStyle(
+                        color: model.status == "ativo"
+                            ? Colors.black
+                            : Colors.black38,
+                        decoration: model.status == "ativo"
+                            ? TextDecoration.none
+                            : TextDecoration.lineThrough),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      model.status == "ativo"
+                          ? IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ))
+                          : const SizedBox.shrink(),
+                      const SizedBox(width: 10),
+                      IconButton(
+                        onPressed: () => controller.delete(id: model.id!),
+                        icon: Icon(
+                          Icons.delete,
+                          color: model.status == "ativo"
+                              ? Colors.black
+                              : Colors.black38,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Text(model.description ?? ''),
                 Text(model.createdAt.toString()),
               ],
