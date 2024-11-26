@@ -3,12 +3,14 @@ class ItemModel {
   String? name;
   String? description;
   String? status;
+  String? taskId;
 
   ItemModel({
     this.id,
     this.name,
     this.description,
     this.status,
+    this.taskId,
   });
 
   Map<String, dynamic> toMap() {
@@ -17,6 +19,7 @@ class ItemModel {
       'name': name,
       'description': description,
       'status': status,
+      'task_id': taskId,
     };
   }
 
