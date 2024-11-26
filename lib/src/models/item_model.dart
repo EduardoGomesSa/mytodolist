@@ -3,7 +3,7 @@ class ItemModel {
   String? name;
   String? description;
   String? status;
-  String? taskId;
+  int? taskId;
 
   ItemModel({
     this.id,

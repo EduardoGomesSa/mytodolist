@@ -27,7 +27,7 @@ class TaskPage extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
               ),
               builder: (context) {
-                return const ItemAddModal();
+                return ItemAddModal(taskId: model.id!);
               });
         },
         child: const Icon(

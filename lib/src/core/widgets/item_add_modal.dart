@@ -4,7 +4,9 @@ import 'package:mytodolist/src/controllers/item_controller.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
 
 class ItemAddModal extends StatefulWidget {
-  const ItemAddModal({super.key});
+  const ItemAddModal({super.key, required this.taskId});
+
+  final int taskId;
 
   @override
   State<ItemAddModal> createState() => _ItemAddModalState();
@@ -64,6 +66,7 @@ class _ItemAddModalState extends State<ItemAddModal> {
                               //   controller.task.id = widget.task!.id;
                               //   controller.renew();
                               // }
+                              controller.item.taskId = widget.taskId;
                               controller.post();
                               Navigator.of(context).pop();
                             }
