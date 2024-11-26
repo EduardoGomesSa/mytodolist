@@ -30,7 +30,8 @@ class TaskPage extends StatelessWidget {
                     leading: IconButton(
                       onPressed: () => controller.changeStatus(
                           id: model.id!,
-                          status: model.status == "ativo" ? "inativo" : "ativo"),
+                          status:
+                              model.status == "ativo" ? "inativo" : "ativo"),
                       icon: Icon(
                         model.status == "ativo"
                             ? Icons.check_box_outline_blank_sharp
@@ -93,6 +94,14 @@ class TaskPage extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 15),
+          model.items != null && model.items!.isNotEmpty
+              ? const Card(
+                  child: Text("Items"),
+                )
+              : const Center(
+                  child: Text("Nenhum item nessa tarefa"),
+                )
         ],
       ),
       floatingActionButton: FloatingActionButton(
