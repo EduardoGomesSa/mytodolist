@@ -4,7 +4,6 @@ import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/models/item_model.dart';
 import 'package:mytodolist/src/repositories/item_repository.dart';
-import 'package:mytodolist/src/repositories/task_repository.dart';
 
 class ItemController extends GetxController {
   final AuthController auth;
