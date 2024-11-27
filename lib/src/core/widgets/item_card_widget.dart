@@ -32,6 +32,35 @@ class ItemCardWidget extends StatelessWidget {
           ),
           color: Colors.white,
         ),
+        title: Text(
+            model.name.toString(),
+            style: TextStyle(
+                color: model.status == "ativo" ? Colors.black : Colors.black38,
+                decoration: model.status == "ativo"
+                    ? TextDecoration.none
+                    : TextDecoration.lineThrough),
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              model.status == "ativo"
+                  ? IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                      ))
+                  : const SizedBox.shrink(),
+              const SizedBox(width: 10),
+              IconButton(
+                onPressed: () => controller.delete(id: model.id!),
+                icon: Icon(
+                  Icons.delete,
+                  color: model.status == "ativo" ? Colors.black : Colors.black38,
+                ),
+              ),
+            ],
+          ),
       ),
     );
   }
