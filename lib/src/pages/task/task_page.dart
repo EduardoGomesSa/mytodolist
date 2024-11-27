@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/item_add_modal.dart';
+import 'package:mytodolist/src/core/widgets/item_card_widget.dart';
 import 'package:mytodolist/src/models/task_model.dart';
 
 class TaskPage extends StatelessWidget {
@@ -96,9 +97,11 @@ class TaskPage extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           model.items != null && model.items!.isNotEmpty
-              ? const Card(
-                  child: Text("Items"),
-                )
+              ? ListView.builder(
+                itemCount: model.items!.length,
+                itemBuilder: (_, index) {
+                return ItemCardWidget(model: model.items![index]);
+              })
               : const Center(
                   child: Text("Nenhum item nessa tarefa"),
                 )

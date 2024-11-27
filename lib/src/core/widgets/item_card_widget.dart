@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/item_controller.dart';
 import 'package:mytodolist/src/models/item_model.dart';
 
 class ItemCardWidget extends StatelessWidget {
   const ItemCardWidget({
     super.key,
-    required this.model,
-    required this.controller,
+    required this.model
   });
 
   final ItemModel model;
-  final ItemController controller;
-
+  
   @override
   Widget build(BuildContext context) {
+    final ItemController controller = Get.find();
+
     return Card(
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       color: model.status == "ativo"
