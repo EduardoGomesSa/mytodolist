@@ -30,7 +30,7 @@ class ItemController extends GetxController {
     );
 
     if (!result.isError) {
-      await taskRepository.getById(token: token, id: 1);
+      await taskRepository.getById(token: token, id: item.taskId!);
     }
 
     isLoading.value = false;
@@ -44,7 +44,7 @@ class ItemController extends GetxController {
     ApiResult<bool> result = await repository.update(token: token, model: item);
 
     if (!result.isError) {
-      await taskRepository.getById(token: token, id: 1);
+      await taskRepository.getById(token: token, id: item.taskId!);
     }
 
     isLoading.value = false;
@@ -58,7 +58,7 @@ class ItemController extends GetxController {
     ApiResult<bool> result = await repository.delete(token: token, id: id);
 
     if (!result.isError) {
-      await taskRepository.getById(token: token, id: 1);
+      await taskRepository.getById(token: token, id: item.taskId!);
     }
 
     isLoading.value = false;
@@ -79,7 +79,7 @@ class ItemController extends GetxController {
     );
 
     if (!result.isError) {
-      await taskRepository.getById(token: token, id: 1);
+      await taskRepository.getById(token: token, id: item.taskId!);
     }
 
     isLoading.value = false;
