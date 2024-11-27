@@ -10,7 +10,7 @@ class ItemBinding extends Bindings {
       ItemController(
         auth: Get.find(),
         repository: Get.find(),
-        taskRepository: Get.find(),
+        taskController: Get.find(),
       ),
     );
   }
