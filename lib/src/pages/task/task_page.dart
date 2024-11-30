@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytodolist/src/controllers/item_controller.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/item_add_modal.dart';
 import 'package:mytodolist/src/core/widgets/item_card_widget.dart';
@@ -10,9 +11,13 @@ class TaskPage extends StatelessWidget {
 
   final TaskModel model;
   final TaskController controller = Get.find<TaskController>();
+  final ItemController itemController = Get.find<ItemController>();
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      itemController.getItemsTask(id: model.id!);
+    });
     return Scaffold(
       appBar: AppBar(
         title: const Text("Detalhes da Tarefa"),
@@ -97,30 +102,30 @@ class TaskPage extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Expanded(
-                  child: GetX<TaskController>(
-                      init: controller,
-                      builder: (controller) {
-                        if (controller.isLoading.value) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        } else if (controller.task.value.items == null ||
-                            controller.task.value.items!.isEmpty) {
-                          return const Center(
-                            child: Text("Nenhum item nessa tarefa"),
-                          );
-                        }
-                        return Column(
-                          children: [
-                            Expanded(
-                              child: ListView.builder(
-                                  itemCount: controller.task.value.items!.length,
-                                  itemBuilder: (_, index) {
-                                    return ItemCardWidget(model: controller.task.value.items![index]);
-                                  }),
-                            ),
-                          ],
-                        );
-                      }))
+              child: GetX<TaskController>(
+                  init: controller,
+                  builder: (controller) {
+                    if (controller.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (controller.task.value.items == null ||
+                        controller.task.value.items!.isEmpty) {
+                      return const Center(
+                        child: Text("Nenhum item nessa tarefa"),
+                      );
+                    }
+                    return Column(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                              itemCount: controller.task.value.items!.length,
+                              itemBuilder: (_, index) {
+                                return ItemCardWidget(
+                                    model: controller.task.value.items![index]);
+                              }),
+                        ),
+                      ],
+                    );
+                  }))
         ],
       ),
       floatingActionButton: FloatingActionButton(
