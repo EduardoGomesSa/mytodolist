@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/item_add_modal.dart';
@@ -98,12 +101,30 @@ class TaskPage extends StatelessWidget {
           const SizedBox(height: 15),
           model.items != null && model.items!.isNotEmpty
               ? Expanded(
-                child: ListView.builder(
-                  itemCount: model.items!.length,
-                  itemBuilder: (_, index) {
-                  return ItemCardWidget(model: model.items![index]);
-                }),
-              )
+                  child: GetX<TaskController>(
+                      init: controller,
+                      builder: (controller) {
+                        if (controller.isLoading.value) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (controller.task.value.items == null ||
+                            controller.task.value.items!.isEmpty) {
+                          return const Center(
+                            child: Text("Nenhum item nessa tarefa"),
+                          );
+                        }
+                        return Column(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                  itemCount: controller.task.value.items!.length,
+                                  itemBuilder: (_, index) {
+                                    return ItemCardWidget(model: controller.task.value.items![index]);
+                                  }),
+                            ),
+                          ],
+                        );
+                      }))
               : const Center(
                   child: Text("Nenhum item nessa tarefa"),
                 )

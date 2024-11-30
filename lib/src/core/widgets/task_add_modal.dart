@@ -68,7 +68,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
                 controller: titleController,
                 focusNode: titleFocusNode,
                 onSaved: (value) {
-                  controller.task.name = value;
+                  controller.task.value.name = value;
                 },
               ),
               const SizedBox(height: 16),
@@ -77,7 +77,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
                 icon: Icons.abc,
                 controller: descriptionController,
                 onSaved: (value) {
-                  controller.task.description = value;
+                  controller.task.value.description = value;
                 },
               ),
               const SizedBox(height: 20),
@@ -97,7 +97,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
                               if (widget.task == null) {
                                 controller.post();
                               } else {
-                                controller.task.id = widget.task!.id;
+                                controller.task.value.id = widget.task!.id;
                                 controller.renew();
                               }
                               Navigator.of(context).pop();

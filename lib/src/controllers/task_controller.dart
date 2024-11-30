@@ -17,7 +17,7 @@ class TaskController extends GetxController {
   });
 
   RxBool isLoading = false.obs;
-  TaskModel task = TaskModel();
+  Rx<TaskModel> task = TaskModel().obs;
   RxList<TaskModel> listTask = RxList<TaskModel>([]);
 
   @override
@@ -50,8 +50,11 @@ class TaskController extends GetxController {
         await repository.getById(token: token, id: id);
 
     if (!result.isError) {
-      task = result.data!;
+      task.value = result.data!;
+      //task.value.items;
     }
+
+    isLoading.value = false;
   }
 
   Future post() async {
@@ -60,7 +63,7 @@ class TaskController extends GetxController {
     String token = auth.user.token!;
 
     ApiResult<TaskModel> result =
-        await repository.insert(token: token, task: task);
+        await repository.insert(token: token, task: task.value);
 
     if (!result.isError) {
       await getAll();
@@ -100,7 +103,8 @@ class TaskController extends GetxController {
 
     String token = auth.user.token!;
 
-    ApiResult<bool> result = await repository.update(token: token, task: task);
+    ApiResult<bool> result =
+        await repository.update(token: token, task: task.value);
 
     if (!result.isError) {
       await getAll();
