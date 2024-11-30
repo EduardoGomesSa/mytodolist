@@ -97,11 +97,13 @@ class TaskPage extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           model.items != null && model.items!.isNotEmpty
-              ? ListView.builder(
-                itemCount: model.items!.length,
-                itemBuilder: (_, index) {
-                return ItemCardWidget(model: model.items![index]);
-              })
+              ? Expanded(
+                child: ListView.builder(
+                  itemCount: model.items!.length,
+                  itemBuilder: (_, index) {
+                  return ItemCardWidget(model: model.items![index]);
+                }),
+              )
               : const Center(
                   child: Text("Nenhum item nessa tarefa"),
                 )
