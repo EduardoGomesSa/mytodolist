@@ -36,7 +36,7 @@ class TaskRepository {
     required String token,
     required int id,
   }) async {
-    const String endpoint = "${Url.base}tasks/byid";
+    const String endpoint = "${Url.base}/tasks/byid";
 
     Map<String, dynamic> body = {
       'id': id,
