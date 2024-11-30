@@ -27,7 +27,7 @@ class TaskController extends GetxController {
     super.onInit();
   }
 
-  Future getAllent() async {
+  Future getAll() async {
     isLoading.value = true;
     String token = auth.user.token!;
 
