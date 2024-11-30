@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
@@ -18,6 +20,14 @@ class ItemController extends GetxController {
 
   RxBool isLoading = false.obs;
   ItemModel item = ItemModel();
+
+  Future getItemsTask({required int id}) async {
+    isLoading.value = true;
+
+    await taskController.getById(id: id);
+
+    isLoading.value = false;
+  }
 
   Future post() async {
     String token = auth.user.token!;

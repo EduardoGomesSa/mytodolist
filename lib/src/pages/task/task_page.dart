@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/item_add_modal.dart';
@@ -99,8 +96,7 @@ class TaskPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 15),
-          model.items != null && model.items!.isNotEmpty
-              ? Expanded(
+          Expanded(
                   child: GetX<TaskController>(
                       init: controller,
                       builder: (controller) {
@@ -125,9 +121,6 @@ class TaskPage extends StatelessWidget {
                           ],
                         );
                       }))
-              : const Center(
-                  child: Text("Nenhum item nessa tarefa"),
-                )
         ],
       ),
       floatingActionButton: FloatingActionButton(
