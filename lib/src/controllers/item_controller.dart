@@ -46,7 +46,7 @@ class ItemController extends GetxController {
     isLoading.value = false;
   }
 
-  Future renew({required int taskId}) async {
+  Future renew() async {
     String token = auth.user.token!;
 
     isLoading.value = true;
