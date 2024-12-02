@@ -30,6 +30,7 @@ class ItemModel {
       description:
           map['description'] != null ? map['description'] as String : null,
       status: map['status'] != null ? map['status'] as String : null,
+      taskId: map['task_id'] != null ? map['task_id'] as int : null,
     );
   }
 }

@@ -60,7 +60,7 @@ class ItemController extends GetxController {
     isLoading.value = false;
   }
 
-  Future delete({required int id}) async {
+  Future delete({required int id, required int taskId}) async {
     String token = auth.user.token!;
 
     isLoading.value = true;
@@ -68,7 +68,7 @@ class ItemController extends GetxController {
     ApiResult<bool> result = await repository.delete(token: token, id: id);
 
     if (!result.isError) {
-      await taskController.getById(id: item.taskId!);
+      await taskController.getById(id: taskId);
     }
 
     isLoading.value = false;
@@ -76,6 +76,7 @@ class ItemController extends GetxController {
 
   Future changeStatus({
     required int id,
+    required int taskId,
     required String status,
   }) async {
     String token = auth.user.token!;
@@ -89,7 +90,7 @@ class ItemController extends GetxController {
     );
 
     if (!result.isError) {
-      await taskController.getById(id: item.taskId!);
+      await taskController.getById(id: taskId);
     }
 
     isLoading.value = false;
