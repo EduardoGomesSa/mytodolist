@@ -4,9 +4,14 @@ import 'package:mytodolist/src/controllers/item_controller.dart';
 import 'package:mytodolist/src/models/item_model.dart';
 
 class ItemCardWidget extends StatelessWidget {
-  const ItemCardWidget({super.key, required this.model});
+  const ItemCardWidget({
+    super.key,
+    required this.model,
+    required this.onShowModalEditItem,
+  });
 
   final ItemModel model;
+  final VoidCallback onShowModalEditItem;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class ItemCardWidget extends StatelessWidget {
           children: [
             model.status == "ativo"
                 ? IconButton(
-                    onPressed: () {},
+                    onPressed: onShowModalEditItem,
                     icon: const Icon(
                       Icons.edit,
                       color: Colors.black,
@@ -54,7 +59,8 @@ class ItemCardWidget extends StatelessWidget {
                 : const SizedBox.shrink(),
             const SizedBox(width: 10),
             IconButton(
-              onPressed: () => controller.delete(id: model.id!, taskId: model.taskId!),
+              onPressed: () =>
+                  controller.delete(id: model.id!, taskId: model.taskId!),
               icon: Icon(
                 Icons.delete,
                 color: model.status == "ativo" ? Colors.black : Colors.black38,
