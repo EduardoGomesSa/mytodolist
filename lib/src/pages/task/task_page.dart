@@ -68,7 +68,13 @@ class TaskPage extends StatelessWidget {
                                 ))
                             : const SizedBox.shrink(),
                         IconButton(
-                          onPressed: () => controller.delete(id: model.id!),
+                          onPressed: () {
+                            controller.delete(id: model.id!);
+
+                            //Future.delayed(Duration.zero);
+
+                            Navigator.pop(context);
+                          },
                           icon: Icon(
                             Icons.delete,
                             color: model.status == "ativo"
@@ -132,9 +138,10 @@ class TaskPage extends StatelessWidget {
                                     ),
                                     builder: (context) {
                                       return ItemAddModal(
-                                          taskId: model.id!,
-                                          model: controller
-                                              .task.value.items![index],);
+                                        taskId: model.id!,
+                                        model:
+                                            controller.task.value.items![index],
+                                      );
                                     },
                                   ),
                                 );
