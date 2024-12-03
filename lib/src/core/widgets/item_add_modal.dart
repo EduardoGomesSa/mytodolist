@@ -34,7 +34,7 @@ class _ItemAddModalState extends State<ItemAddModal> {
   @override
   void dispose() {
     titleController.dispose();
-    
+
     super.dispose();
   }
 
@@ -56,7 +56,7 @@ class _ItemAddModalState extends State<ItemAddModal> {
           key: _formKey,
           child: Column(
             children: [
-              const Text("Adicionar item"),
+              Text(widget.model == null ?  "Adicionar Item" : 'Editar Item'),
               const SizedBox(height: 15),
               TextFieldWidget(
                 label: "Nome",
@@ -81,14 +81,17 @@ class _ItemAddModalState extends State<ItemAddModal> {
 
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                              // if (widget.task == null) {
-                              //   controller.post();
-                              // } else {
-                              //   controller.task.id = widget.task!.id;
-                              //   controller.renew();
-                              // }
+
                               controller.item.taskId = widget.taskId;
-                              controller.post();
+                              
+                              if (widget.model == null) {
+                                controller.post();
+                              } else {
+                                controller.item.id = widget.model!.id;
+                                controller.renew();
+                              }
+                              // controller.item.taskId = widget.taskId;
+                              // controller.post();
                               Navigator.of(context).pop();
                             }
                           },
@@ -97,11 +100,10 @@ class _ItemAddModalState extends State<ItemAddModal> {
                         : SizedBox(
                             height: 50,
                             width: MediaQuery.of(context).size.width,
-                            child: const Center(
-                              child: Text("Salvar Item"),
-                              // child: Text(widget.task == null
-                              //     ? 'Salvar Tarefa'
-                              //     : 'Editar Tarefa'),
+                            child: Center(
+                              child: Text(widget.model == null
+                                  ? 'Salvar Item'
+                                  : 'Editar Item'),
                             ),
                           ),
                   );
