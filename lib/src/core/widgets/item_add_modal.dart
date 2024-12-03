@@ -56,7 +56,8 @@ class _ItemAddModalState extends State<ItemAddModal> {
           key: _formKey,
           child: Column(
             children: [
-              Text(widget.model == null ?  "Adicionar Item" : 'Editar Item'),
+              Text(widget.model == null ?  "Adicionar Item" : 'Editar Item', style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
               const SizedBox(height: 15),
               TextFieldWidget(
                 label: "Nome",
@@ -83,7 +84,7 @@ class _ItemAddModalState extends State<ItemAddModal> {
                               _formKey.currentState!.save();
 
                               controller.item.taskId = widget.taskId;
-                              
+
                               if (widget.model == null) {
                                 controller.post();
                               } else {
