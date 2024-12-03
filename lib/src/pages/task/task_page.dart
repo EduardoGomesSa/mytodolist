@@ -120,7 +120,20 @@ class TaskPage extends StatelessWidget {
                               itemCount: controller.task.value.items!.length,
                               itemBuilder: (_, index) {
                                 return ItemCardWidget(
-                                    model: controller.task.value.items![index]);
+                                    model: controller.task.value.items![index],
+                                    onShowModalEditItem: () => showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    context: context,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(25),
+                                      ),
+                                    ),
+                                    builder: (context) {
+                                      return ItemAddModal(taskId: model.id!);
+                                    },
+                                  ),
+                                );
                               }),
                         ),
                       ],
