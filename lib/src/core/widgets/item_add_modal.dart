@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/item_controller.dart';
 import 'package:mytodolist/src/core/widgets/text_field_widget.dart';
+import 'package:mytodolist/src/models/item_model.dart';
 
 class ItemAddModal extends StatefulWidget {
-  const ItemAddModal({super.key, required this.taskId});
+  const ItemAddModal({
+    super.key,
+    required this.taskId,
+    this.model,
+  });
 
   final int taskId;
+  final ItemModel? model;
 
   @override
   State<ItemAddModal> createState() => _ItemAddModalState();
@@ -17,6 +23,21 @@ class _ItemAddModalState extends State<ItemAddModal> {
   TextEditingController titleController = TextEditingController();
   final controller = Get.find<ItemController>();
   final FocusNode titleFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    titleController = TextEditingController(text: widget.model?.name ?? '');
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
