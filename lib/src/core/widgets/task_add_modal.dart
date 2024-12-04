@@ -61,7 +61,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 15),
               TextFieldWidget(
                 label: "Título",
                 icon: Icons.title,
@@ -71,7 +71,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
                   controller.task.value.name = value;
                 },
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
               TextFieldWidget(
                 label: 'Descrição',
                 icon: Icons.abc,
@@ -80,7 +80,7 @@ class _TaskAddModalState extends State<TaskAddModal> {
                   controller.task.value.description = value;
                 },
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               SizedBox(
                 child: GetX<TaskController>(builder: (controller) {
                   return ElevatedButton(
