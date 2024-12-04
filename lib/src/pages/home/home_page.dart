@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
 import 'package:mytodolist/src/core/widgets/task_add_modal.dart';
 import 'package:mytodolist/src/core/widgets/task_card_widget.dart';
+import 'package:mytodolist/src/pages/profile/profile_page.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -14,7 +15,19 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Minhas Tarefas'),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.person, color: Colors.black,),),],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const ProfilePage();
+              }));
+            },
+            icon: const Icon(
+              Icons.person,
+              color: Colors.black,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -23,7 +36,7 @@ class HomePage extends StatelessWidget {
               init: taskController,
               builder: (controller) {
                 if (taskController.isLoading.value) {
-                  return  const Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (taskController.listTask.isEmpty) {
                   return const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -52,7 +65,8 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           builder: (context) {
-                            return TaskAddModal(task: taskController.listTask[index]);
+                            return TaskAddModal(
+                                task: taskController.listTask[index]);
                           },
                         ),
                       );

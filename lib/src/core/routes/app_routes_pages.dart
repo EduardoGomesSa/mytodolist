@@ -5,6 +5,7 @@ import 'package:mytodolist/src/bindings/task_binding.dart';
 import 'package:mytodolist/src/pages/auth/login_page.dart';
 import 'package:mytodolist/src/pages/auth/register_page.dart';
 import 'package:mytodolist/src/pages/home/home_page.dart';
+import 'package:mytodolist/src/pages/profile/profile_page.dart';
 
 abstract class AppPages {
   static final pages = <GetPage>[
@@ -25,6 +26,10 @@ abstract class AppPages {
       name: AppRoutes.register,
       page: () => RegisterPage(),
     ),
+    GetPage(
+      name: AppRoutes.profile, 
+      page: () => const ProfilePage(),
+    ),
   ];
 }
 
@@ -33,4 +38,5 @@ abstract class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String splash = '/splash';
+  static const String profile = '/profile';
 }
