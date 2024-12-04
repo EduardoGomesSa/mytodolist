@@ -61,6 +61,7 @@ class TaskController extends GetxController {
     isLoading.value = true;
 
     String token = auth.user.token!;
+    task.value.id = null;
 
     ApiResult<TaskModel> result =
         await repository.insert(token: token, task: task.value);
