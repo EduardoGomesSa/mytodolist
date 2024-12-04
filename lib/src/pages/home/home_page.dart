@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Minhas Tarefas'),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.person))],
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.person, color: Colors.black,),),],
       ),
       body: Column(
         children: [

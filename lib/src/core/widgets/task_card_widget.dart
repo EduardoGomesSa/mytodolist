@@ -36,7 +36,7 @@ class TaskCardWidget extends StatelessWidget {
                   : Icons.check_box_outlined,
               size: 30,
             ),
-            color: Colors.white,
+            color: task.status == "ativo" ? Colors.black : Colors.black38,
           ),
           title: Text(
             task.name.toString(),
