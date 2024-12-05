@@ -93,7 +93,7 @@ class AuthRepository {
     });
 
     if (response['message'] != null) {
-      return ApiResult<bool>(data: true);
+      return ApiResult<bool>(data: true, message: "Logout realizado com sucesso!");
     } else {
       return ApiResult<bool>(message: 'Não foi possível sair do aplicativo. Tente novamente', isError: true);
     }

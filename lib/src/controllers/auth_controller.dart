@@ -77,9 +77,14 @@ class AuthController extends GetxController {
     String? token = await appUtils.getLocalData(key: 'user-token');
     await appUtils.removeLocalData(key: 'user-token');
 
-    await repository.signOut(token: token ?? "");
+    var result = await repository.signOut(token: token ?? "");
 
-    Get.offAllNamed(AppRoutes.login);
+    if (!result.isError) {
+      appUtils.showToast(message: result.message!);
+      Get.offAllNamed(AppRoutes.login);
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
   }
 
   // Future getUser() async {
