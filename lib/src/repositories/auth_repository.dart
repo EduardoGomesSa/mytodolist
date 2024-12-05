@@ -85,7 +85,7 @@ class AuthRepository {
     }
   }
 
-  Future<String?> signOut({required String token}) async {
+  Future<ApiResult<bool>> signOut({required String token}) async {
     const String endpoint = "${Url.base}/logout";
     final response = await httpManager
         .request(url: endpoint, method: HttpMethods.post, headers: {
@@ -93,9 +93,9 @@ class AuthRepository {
     });
 
     if (response['message'] != null) {
-      return response['message'];
+      return ApiResult<bool>(data: true);
     } else {
-      return null;
+      return ApiResult<bool>(message: 'Não foi possível sair do aplicativo. Tente novamente', isError: true);
     }
   }
 }
