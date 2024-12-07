@@ -93,9 +93,36 @@ class AuthRepository {
     });
 
     if (response['message'] != null) {
-      return ApiResult<bool>(data: true, message: "Logout realizado com sucesso!");
+      return ApiResult<bool>(
+          data: true, message: "Logout realizado com sucesso!");
     } else {
-      return ApiResult<bool>(message: 'Não foi possível sair do aplicativo. Tente novamente', isError: true);
+      return ApiResult<bool>(
+          message: 'Não foi possível sair do aplicativo. Tente novamente',
+          isError: true);
     }
+  }
+
+  Future<ApiResult<bool>> deleteAccount({
+    required String token,
+    required int id,
+  }) async {
+    const String endpoint = "${Url.base}/delete";
+    Map<String, dynamic> body = {'id': id};
+    final response = await httpManager.request(
+      url: endpoint,
+      method: HttpMethods.delete,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      body: body,
+    );
+
+    if (response['message'] != null) {
+      return ApiResult<bool>(
+          message: "Conta excluída com sucesso!", isError: false,);
+    }
+
+    return ApiResult<bool>(
+          message: "Erro ao excluír conta", isError: true,);
   }
 }
