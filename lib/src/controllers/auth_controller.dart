@@ -87,9 +87,16 @@ class AuthController extends GetxController {
     }
   }
 
-  // Future getUser() async {
-  //   isLoading.value = true;
-  //   user = auth.user;
+  Future deleteAccount({required int id}) async {
+    String token = user.token!;
 
-  // }
+    var result = await repository.deleteAccount(token: token, id: id);
+
+    if (!result.isError) {
+      appUtils.showToast(message: result.message!);
+      Get.offAllNamed(AppRoutes.login);
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+  }
 }
