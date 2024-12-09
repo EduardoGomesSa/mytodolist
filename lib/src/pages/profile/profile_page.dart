@@ -45,7 +45,9 @@ class ProfilePage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     )),
-                onPressed: () {},
+                onPressed: () {
+                  controller.deleteAccount();
+                },
                 child: const Text(
                   "Excluir conta",
                   style: TextStyle(color: Colors.red),

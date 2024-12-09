@@ -87,10 +87,10 @@ class AuthController extends GetxController {
     }
   }
 
-  Future deleteAccount({required int id}) async {
+  Future deleteAccount() async {
     String token = user.token!;
 
-    var result = await repository.deleteAccount(token: token, id: id);
+    var result = await repository.deleteAccount(token: token, id: user.id!);
 
     if (!result.isError) {
       appUtils.showToast(message: result.message!);
