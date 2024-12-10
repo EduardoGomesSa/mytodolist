@@ -17,6 +17,30 @@ class ItemCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ItemController controller = Get.find();
 
+    excluirItem() {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title:
+                  const Text("Tem certeza que gostaria de apagar esse item?"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    controller.delete(id: model.id!, taskId: model.taskId!);
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Sim"),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text("Não"),
+                ),
+              ],
+            );
+          });
+    }
+
     return Card(
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       color: model.status == "ativo"
@@ -60,7 +84,7 @@ class ItemCardWidget extends StatelessWidget {
             const SizedBox(width: 10),
             IconButton(
               onPressed: () =>
-                  controller.delete(id: model.id!, taskId: model.taskId!),
+                  excluirItem(),
               icon: Icon(
                 Icons.delete,
                 color: model.status == "ativo" ? Colors.black : Colors.black38,
