@@ -121,6 +121,12 @@ class TaskPage extends StatelessWidget {
                     }
                     return Column(
                       children: [
+                        const Center(
+                          child: Text(
+                            "ITENS",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
                         Expanded(
                           child: ListView.builder(
                               itemCount: controller.task.value.items!.length,
