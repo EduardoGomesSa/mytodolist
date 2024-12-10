@@ -33,8 +33,14 @@ class ItemCardWidget extends StatelessWidget {
                   child: const Text("Sim"),
                 ),
                 TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
+                    )
+                  ),
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text("Não"),
+                  child: const Text("Não", style: TextStyle(color: Colors.white),),
                 ),
               ],
             );
