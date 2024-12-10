@@ -17,6 +17,30 @@ class TaskCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    excluirTask() {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title:
+                  const Text("Tem certeza que gostaria de apagar essa tarefa?"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    controller.delete(id: task.id!);
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Sim"),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text("Não"),
+                ),
+              ],
+            );
+          });
+    }
+
     return GestureDetector(
       onTap: () => Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => TaskPage(model: task))),
@@ -59,7 +83,7 @@ class TaskCardWidget extends StatelessWidget {
                   : const SizedBox.shrink(),
               const SizedBox(width: 10),
               IconButton(
-                onPressed: () => controller.delete(id: task.id!),
+                onPressed: () => excluirTask(),
                 icon: Icon(
                   Icons.delete,
                   color: task.status == "ativo" ? Colors.black : Colors.black38,
