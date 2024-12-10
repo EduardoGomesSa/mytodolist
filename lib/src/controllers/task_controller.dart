@@ -126,7 +126,7 @@ class TaskController extends GetxController {
     ApiResult<bool> result = await repository.delete(token: token, id: id);
 
     if (!result.isError) {
-      if (task.value.id! > 0) {
+      if (task.value.id != null && task.value.id! > 0) {
         task.value = TaskModel();
       }
       await getAll();
