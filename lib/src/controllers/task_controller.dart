@@ -126,6 +126,9 @@ class TaskController extends GetxController {
     ApiResult<bool> result = await repository.delete(token: token, id: id);
 
     if (!result.isError) {
+      if (task.value.id! > 0) {
+        task.value = TaskModel();
+      }
       await getAll();
       appUtils.showToast(message: result.message!);
     } else {
