@@ -115,9 +115,13 @@ class TaskPage extends StatelessWidget {
                       return const Center(child: CircularProgressIndicator());
                     } else if (controller.task.value.items == null ||
                         controller.task.value.items!.isEmpty) {
-                      return const Center(
-                        child: Text("Nenhum item nessa tarefa"),
-                      );
+                      return const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                        Icon(Icons.task, size: 80, color: Colors.black38,),
+                        Center(child: Text("Nenhum item nessa tarefa", style: TextStyle(fontSize: 22),),),
+                      ],);
                     }
                     return Column(
                       children: [
