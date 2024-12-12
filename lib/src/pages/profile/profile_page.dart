@@ -9,14 +9,47 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<AuthController>();
 
+    deleteAccountConfirmation() {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              title: const Text(
+                  "Tem certeza que gostaria de excluir sua conta? Essa ação não poderá ser desfeita"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    controller.deleteAccount();
+                  },
+                  child: const Text("Sim"),
+                ),
+                const SizedBox(width: 10),
+                TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text(
+                    "Não",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            );
+          });
+    }
+
     logoutConfirmation() {
       return showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)
-              ),
+                  borderRadius: BorderRadius.circular(10)),
               title:
                   const Text("Tem certeza que gostaria de sair do aplicativo?"),
               actions: [
@@ -30,15 +63,15 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(width: 10),
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
-                  ),
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text("Não", style: TextStyle(color: Colors.white),),
+                  child: const Text(
+                    "Não",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-                
               ],
             );
           });
@@ -81,7 +114,7 @@ class ProfilePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     )),
                 onPressed: () {
-                  controller.deleteAccount();
+                  deleteAccountConfirmation();
                 },
                 child: const Text(
                   "Excluir conta",
