@@ -9,6 +9,30 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<AuthController>();
 
+    logoutConfirmation() {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title:
+                  const Text("Tem certeza que gostaria de sair do aplicativo?"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text("Não"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    controller.signOut();
+                  },
+                  child: const Text("Sim"),
+                ),
+              ],
+            );
+          });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perfil'),
@@ -27,7 +51,7 @@ class ProfilePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     )),
                 onPressed: () {
-                  controller.signOut();
+                  logoutConfirmation();
                 },
                 child: const Text("Sair"),
               ),
