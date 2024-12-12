@@ -18,16 +18,23 @@ class ProfilePage extends StatelessWidget {
                   const Text("Tem certeza que gostaria de sair do aplicativo?"),
               actions: [
                 TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text("Não"),
-                ),
-                TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                     controller.signOut();
                   },
                   child: const Text("Sim"),
                 ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
+                    )
+                  ),
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text("Não", style: TextStyle(color: Colors.white),),
+                ),
+                
               ],
             );
           });
