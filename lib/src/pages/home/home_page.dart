@@ -41,11 +41,11 @@ class HomePage extends StatelessWidget {
                   return const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.task, size: 60),
+                      Icon(Icons.task, size: 60, color: Colors.black38,),
                       SizedBox(height: 15),
                       Center(
                           child: Text("Nenhuma tarefa cadastrada",
-                              style: TextStyle(fontSize: 18))),
+                              style: TextStyle(fontSize: 18, color: Colors.black38))),
                     ],
                   );
                 }
