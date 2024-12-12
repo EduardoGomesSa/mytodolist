@@ -14,6 +14,9 @@ class ProfilePage extends StatelessWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+              ),
               title:
                   const Text("Tem certeza que gostaria de sair do aplicativo?"),
               actions: [
@@ -24,6 +27,7 @@ class ProfilePage extends StatelessWidget {
                   },
                   child: const Text("Sim"),
                 ),
+                const SizedBox(width: 10),
                 TextButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.red,
