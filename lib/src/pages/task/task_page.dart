@@ -59,9 +59,10 @@ class TaskPage extends StatelessWidget {
                                 color: controller.task.value.status == "ativo"
                                     ? Colors.black
                                     : Colors.black38,
-                                decoration: controller.task.value.status == "ativo"
-                                    ? TextDecoration.none
-                                    : TextDecoration.lineThrough),
+                                decoration:
+                                    controller.task.value.status == "ativo"
+                                        ? TextDecoration.none
+                                        : TextDecoration.lineThrough),
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -94,7 +95,8 @@ class TaskPage extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 80),
-                              child: Text(controller.task.value.description ?? ''),
+                              child:
+                                  Text(controller.task.value.description ?? ''),
                             ),
                           ],
                         ),
@@ -178,23 +180,31 @@ class TaskPage extends StatelessWidget {
                   }))
         ],
       ),
-      floatingActionButton: controller.task.value.status == "ativo" ? FloatingActionButton(
-        onPressed: () async {
-          showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      floatingActionButton: GetX(
+          init: controller,
+          builder: (controller) {
+            if (controller.isLoading.value) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return controller.task.value.status == "ativo" ? FloatingActionButton(
+              onPressed: () async {
+                showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(25)),
+                    ),
+                    builder: (context) {
+                      return ItemAddModal(taskId: model.id!);
+                    });
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.black,
               ),
-              builder: (context) {
-                return ItemAddModal(taskId: model.id!);
-              });
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-      ) : null,
+            ) : const SizedBox.shrink();
+          }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
