@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/item_controller.dart';
@@ -178,7 +180,7 @@ class TaskPage extends StatelessWidget {
                   }))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: model.status == "ativo" ? FloatingActionButton(
         onPressed: () async {
           showModalBottomSheet(
               context: context,
@@ -194,7 +196,7 @@ class TaskPage extends StatelessWidget {
           Icons.add,
           color: Colors.black,
         ),
-      ),
+      ) : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
