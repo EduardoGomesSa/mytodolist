@@ -27,6 +27,8 @@ class _TaskAddModalState extends State<TaskAddModal> {
     titleController = TextEditingController(text: widget.task?.name ?? '');
     descriptionController =
         TextEditingController(text: widget.task?.description ?? '');
+
+    controller.task.value = TaskModel();
   }
 
   @override

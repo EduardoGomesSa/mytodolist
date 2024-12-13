@@ -91,6 +91,10 @@ class TaskController extends GetxController {
     if (!result.isError) {
       await getAll();
 
+      if(task.value.id != null && task.value.id! > 0) {
+        await getById(id: task.value.id!);
+      }
+
       appUtils.showToast(message: result.message!);
     } else {
       appUtils.showToast(message: result.message!, isError: result.isError);
