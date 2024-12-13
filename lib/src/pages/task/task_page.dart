@@ -22,7 +22,12 @@ class TaskPage extends StatelessWidget {
         init: controller,
         builder: (controller) {
           if (controller.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text("Detalhes da Tarefa"),
+              ),
+              body: const Center(child: CircularProgressIndicator()),
+            );
           }
           return Scaffold(
             appBar: AppBar(
