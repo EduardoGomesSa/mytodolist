@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/item_controller.dart';
@@ -44,11 +42,11 @@ class TaskPage extends StatelessWidget {
                           leading: IconButton(
                             onPressed: () => controller.changeStatus(
                                 id: model.id!,
-                                status: model.status == "ativo"
+                                status: controller.task.value.status == "ativo"
                                     ? "inativo"
                                     : "ativo"),
                             icon: Icon(
-                              model.status == "ativo"
+                              controller.task.value.status == "ativo"
                                   ? Icons.check_box_outline_blank_sharp
                                   : Icons.check_box_outlined,
                               size: 30,
@@ -56,19 +54,19 @@ class TaskPage extends StatelessWidget {
                             color: Colors.white,
                           ),
                           title: Text(
-                            model.name.toString(),
+                            controller.task.value.name.toString(),
                             style: TextStyle(
-                                color: model.status == "ativo"
+                                color: controller.task.value.status == "ativo"
                                     ? Colors.black
                                     : Colors.black38,
-                                decoration: model.status == "ativo"
+                                decoration: controller.task.value.status == "ativo"
                                     ? TextDecoration.none
                                     : TextDecoration.lineThrough),
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              model.status == "ativo"
+                              controller.task.value.status == "ativo"
                                   ? IconButton(
                                       onPressed: () {},
                                       icon: const Icon(
@@ -84,7 +82,7 @@ class TaskPage extends StatelessWidget {
                                 },
                                 icon: Icon(
                                   Icons.delete,
-                                  color: model.status == "ativo"
+                                  color: controller.task.value.status == "ativo"
                                       ? Colors.black
                                       : Colors.black38,
                                 ),
@@ -96,7 +94,7 @@ class TaskPage extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 80),
-                              child: Text(model.description ?? ''),
+                              child: Text(controller.task.value.description ?? ''),
                             ),
                           ],
                         ),
@@ -180,7 +178,7 @@ class TaskPage extends StatelessWidget {
                   }))
         ],
       ),
-      floatingActionButton: model.status == "ativo" ? FloatingActionButton(
+      floatingActionButton: controller.task.value.status == "ativo" ? FloatingActionButton(
         onPressed: () async {
           showModalBottomSheet(
               context: context,
