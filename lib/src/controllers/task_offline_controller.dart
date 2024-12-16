@@ -35,5 +35,15 @@ class TaskOfflineController extends GetxController {
     isLoading.value = true;
 
     ApiResult<bool> result = await repository.insert(model: task.value);
+
+    if (!result.isError) {
+      await getAll();
+
+      appUtils.showToast(message: result.message!);
+    } else {
+      appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+
+    isLoading.value = false;
   }
 }
