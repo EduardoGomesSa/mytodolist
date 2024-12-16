@@ -13,12 +13,11 @@ class TaskOfflineRepository {
       return ApiResult(data: listTasks);
     }
 
-    String message =
-          "Não foi possível buscar as tarefas. Tente novamente!";
-      return ApiResult<List<TaskModel>>(message: message, isError: true);
+    String message = "Não foi possível buscar as tarefas. Tente novamente!";
+    return ApiResult<List<TaskModel>>(message: message, isError: true);
   }
 
-  Future<int> insert(TaskModel model) async {
+  Future<ApiResult<bool>> insert({required TaskModel model}) async {
     final db = await Db.connection();
 
     var saved = await db.transaction((txn) async {
@@ -45,6 +44,13 @@ class TaskOfflineRepository {
       return taskId > 0 ? 1 : 0;
     });
 
-    return saved;
+    if (saved > 0) {
+      return ApiResult<bool>(data: true, message: "Tarefa criada com sucesso!");
+    }
+
+    return ApiResult<bool>(
+        data: false,
+        message: "Não foi possível cadastrar a tarefa. Tente novamente!",
+        isError: true,);
   }
 }

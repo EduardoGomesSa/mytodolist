@@ -30,4 +30,10 @@ class TaskOfflineController extends GetxController {
 
     isLoading.value = false;
   }
+
+  Future post() async {
+    isLoading.value = true;
+
+    ApiResult<bool> result = await repository.insert(model: task.value);
+  }
 }

@@ -69,7 +69,7 @@ class TaskController extends GetxController {
     if (!result.isError) {
       await getAll();
 
-      appUtils.showToast(message: "tarefa cadastrada com sucesso!");
+      appUtils.showToast(message: "Tarefa criada com sucesso!");
     } else {
       appUtils.showToast(message: result.message!, isError: result.isError);
     }
