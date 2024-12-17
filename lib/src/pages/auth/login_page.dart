@@ -109,13 +109,29 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 45,
-                    child: OutlinedButton(
+                    child: TextButton(
                       onPressed: () {
                         Get.toNamed(AppRoutes.register);
                       },
-                      style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.blue)),
+                      style: TextButton.styleFrom(
+                        alignment: Alignment.centerRight
+                      ),
                       child: const Text('Não tem uma conta? Crie aqui'),
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: SizedBox(
+                      height: 45,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.register);
+                        },
+                        style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: Colors.blue)),
+                        child: const Text('Entrar como convidado'),
+                      ),
                     ),
                   ),
                 ],
