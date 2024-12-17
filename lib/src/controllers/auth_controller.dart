@@ -31,7 +31,7 @@ class AuthController extends GetxController {
     if (!result.isError) {
       user = result.data!;
       appUtils.showToast(message: "Usuário cadastrado com sucesso");
-      Get.offAllNamed(AppRoutes.login);
+      Get.offAllNamed(AppRoutes.home);
     } else {
       appUtils.showToast(message: result.message!, isError: true);
     }

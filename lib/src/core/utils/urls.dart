@@ -1,3 +1,3 @@
 abstract class Url {
-  static const base = "http://192.168.18.23:80/api";
+  static const base = "http://192.168.1.109:80/api";
 }
