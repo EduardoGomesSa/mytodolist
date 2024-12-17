@@ -23,9 +23,11 @@ class AppUtils {
     return await storage.remove(key);
   }
 
-  Future createUserGuest() async {
+  Future<bool> createUserGuest() async {
     final SharedPreferences storage = await SharedPreferences.getInstance();
-    await storage.setBool('is_guest', true);
+    var created = await storage.setBool('is_guest', true);
+
+    return created;
   }
 
   Future removeUserGuest() async {

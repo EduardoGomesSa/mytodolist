@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
@@ -16,6 +18,7 @@ class AuthController extends GetxController {
 
   RxBool isLoading = false.obs;
   UserModel user = UserModel();
+  RxBool isGuest = false.obs;
 
   @override
   void onInit() {
@@ -24,12 +27,37 @@ class AuthController extends GetxController {
     validateToken();
   }
 
+  Future checkUserIsGuest() async {
+    isLoading.value = true;
+
+    isGuest.value = await appUtils.checkUserIsGuest();
+
+    isLoading.value = false;
+  }
+
+  Future createUserGuest() async {
+    isLoading.value = true;
+
+    var userCreated = await appUtils.createUserGuest();
+
+    if (userCreated) {
+      Get.offAllNamed(AppRoutes.home);
+    } else {
+      appUtils.showToast(
+          message: "Não foi possível entrar como convidado. Tente novamente!",
+          isError: true,);
+    }
+
+    isLoading.value = false;
+  }
+
   Future signUp() async {
     isLoading.value = true;
 
     ApiResult<UserModel> result = await repository.signUp(user);
     if (!result.isError) {
       user = result.data!;
+      appUtils.removeUserGuest();
       appUtils.showToast(message: "Usuário cadastrado com sucesso");
       Get.offAllNamed(AppRoutes.home);
     } else {
@@ -47,6 +75,7 @@ class AuthController extends GetxController {
 
     if (!result.isError) {
       user = result.data!;
+      appUtils.removeUserGuest();
       Get.offAllNamed(AppRoutes.home);
     } else {
       appUtils.showToast(message: result.message!, isError: true);
@@ -69,6 +98,12 @@ class AuthController extends GetxController {
         Get.offAllNamed(AppRoutes.login);
       }
     } else {
+      var userIsGuest = await appUtils.checkUserIsGuest();
+      if (userIsGuest) {
+        isGuest.value = userIsGuest;
+        Get.offAllNamed(AppRoutes.home);
+      }
+
       Get.offAllNamed(AppRoutes.login);
     }
   }

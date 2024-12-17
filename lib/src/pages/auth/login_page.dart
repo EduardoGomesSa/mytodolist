@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
@@ -13,18 +11,16 @@ class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
-    // return Center(
-    //   child: Text('Funcionou PORRAAAAA'),
-    // );
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-           Expanded(
+          Expanded(
             flex: 3,
             child: Container(
               color: Colors.blue,
@@ -66,7 +62,9 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(
                       height: 50,
-                      child: GetX<AuthController>(builder: (controller) {
+                      child: GetX<AuthController>(
+                        init: controller,
+                        builder: (controller) {
                         return ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -114,26 +112,24 @@ class LoginPage extends StatelessWidget {
                         Get.toNamed(AppRoutes.register);
                       },
                       style: TextButton.styleFrom(
-                        alignment: Alignment.centerRight
-                      ),
+                          alignment: Alignment.centerRight),
                       child: const Text('Não tem uma conta? Crie aqui'),
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: SizedBox(
-                      height: 45,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.register);
-                        },
-                        style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.blue)),
-                        child: const Text('Entrar como convidado'),
-                      ),
-                    ),
-                  ),
+                        height: 45,
+                        child: OutlinedButton(
+                            onPressed: () {
+                              controller.createUserGuest();
+                            },
+                            style: OutlinedButton.styleFrom(
+                                side: const BorderSide(color: Colors.blue)),
+                            child: const Text('Entrar como convidado'),
+                          ),
+
+                  ),),
                 ],
               ),
             ),
