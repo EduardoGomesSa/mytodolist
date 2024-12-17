@@ -23,6 +23,22 @@ class AppUtils {
     return await storage.remove(key);
   }
 
+  Future createUserGuest() async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    await storage.setBool('is_guest', true);
+  }
+
+  Future removeUserGuest() async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    await storage.setBool('is_guest', false);
+  }
+
+  Future<bool> checkUserIsGuest() async {
+    final SharedPreferences storage = await SharedPreferences.getInstance();
+    var isGuest = storage.getBool('is_guest');
+    return isGuest != null && isGuest;
+  }
+
   String formatDateTime(DateTime dateTime) {
     initializeDateFormatting();
 
