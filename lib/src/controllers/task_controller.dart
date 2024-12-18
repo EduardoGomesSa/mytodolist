@@ -3,17 +3,20 @@ import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
 import 'package:mytodolist/src/models/task_model.dart';
+import 'package:mytodolist/src/repositories/task_offline_repository.dart';
 import 'package:mytodolist/src/repositories/task_repository.dart';
 
 class TaskController extends GetxController {
   final AuthController auth;
   final TaskRepository repository;
   final AppUtils appUtils;
+  final TaskOfflineRepository offlineRepository;
 
   TaskController({
     required this.auth,
     required this.repository,
     required this.appUtils,
+    required this.offlineRepository,
   });
 
   RxBool isLoading = false.obs;
@@ -29,9 +32,14 @@ class TaskController extends GetxController {
 
   Future getAll() async {
     isLoading.value = true;
-    String token = auth.user.token!;
+    ApiResult<List<TaskModel>> result;
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
 
-    ApiResult<List<TaskModel>> result = await repository.getAll(token: token);
+      result = await repository.getAll(token: token);
+    } else {
+      result = await offlineRepository.getAll();
+    }
 
     if (!result.isError) {
       listTask.assignAll(result.data!);
@@ -91,7 +99,7 @@ class TaskController extends GetxController {
     if (!result.isError) {
       await getAll();
 
-      if(task.value.id != null && task.value.id! > 0) {
+      if (task.value.id != null && task.value.id! > 0) {
         await getById(id: task.value.id!);
       }
 
