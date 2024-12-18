@@ -121,8 +121,8 @@ class LoginPage extends StatelessWidget {
                     child: SizedBox(
                         height: 45,
                         child: OutlinedButton(
-                            onPressed: () {
-                              controller.createUserGuest();
+                            onPressed: () async {
+                              await controller.createUserGuest();
                             },
                             style: OutlinedButton.styleFrom(
                                 side: const BorderSide(color: Colors.blue)),

@@ -21,31 +21,34 @@ class AuthController extends GetxController {
   RxBool isGuest = false.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
 
-    validateToken();
+    await validateToken();
   }
 
   Future checkUserIsGuest() async {
-    isLoading.value = true;
+    //isLoading.value = true;
 
     isGuest.value = await appUtils.checkUserIsGuest();
 
-    isLoading.value = false;
+    //isLoading.value = false;
   }
 
   Future createUserGuest() async {
     isLoading.value = true;
 
+    await appUtils.removeLocalData(key: 'user-token');
     var userCreated = await appUtils.createUserGuest();
+    isGuest.value = userCreated;
 
     if (userCreated) {
       Get.offAllNamed(AppRoutes.home);
     } else {
       appUtils.showToast(
-          message: "Não foi possível entrar como convidado. Tente novamente!",
-          isError: true,);
+        message: "Não foi possível entrar como convidado. Tente novamente!",
+        isError: true,
+      );
     }
 
     isLoading.value = false;
@@ -57,7 +60,9 @@ class AuthController extends GetxController {
     ApiResult<UserModel> result = await repository.signUp(user);
     if (!result.isError) {
       user = result.data!;
-      appUtils.removeUserGuest();
+      var removed = await appUtils.removeUserGuest();
+      isGuest.value = removed ? false : true;
+
       appUtils.showToast(message: "Usuário cadastrado com sucesso");
       Get.offAllNamed(AppRoutes.home);
     } else {
@@ -70,12 +75,14 @@ class AuthController extends GetxController {
   Future signIn({required String email, required String password}) async {
     isLoading.value = true;
 
+    var removed = await appUtils.removeUserGuest();
+    isGuest.value = removed ? false : true;
+
     ApiResult<UserModel> result =
         await repository.signIn(email: email, password: password);
 
     if (!result.isError) {
       user = result.data!;
-      appUtils.removeUserGuest();
       Get.offAllNamed(AppRoutes.home);
     } else {
       appUtils.showToast(message: result.message!, isError: true);
@@ -109,16 +116,23 @@ class AuthController extends GetxController {
   }
 
   Future signOut() async {
-    String? token = await appUtils.getLocalData(key: 'user-token');
-    await appUtils.removeLocalData(key: 'user-token');
-
-    var result = await repository.signOut(token: token ?? "");
-
-    if (!result.isError) {
-      appUtils.showToast(message: result.message!);
+    if (isGuest.value) {
+      await appUtils.removeUserGuest();
+      appUtils.showToast(message: "Logout realizado com sucesso!");
       Get.offAllNamed(AppRoutes.login);
+      isLoading.value = false;
     } else {
-      appUtils.showToast(message: result.message!, isError: result.isError);
+      String? token = await appUtils.getLocalData(key: 'user-token');
+      await appUtils.removeLocalData(key: 'user-token');
+
+      var result = await repository.signOut(token: token ?? "");
+
+      if (!result.isError) {
+        appUtils.showToast(message: result.message!);
+        Get.offAllNamed(AppRoutes.login);
+      } else {
+        appUtils.showToast(message: result.message!, isError: result.isError);
+      }
     }
   }
 

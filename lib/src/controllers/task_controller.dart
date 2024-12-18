@@ -68,11 +68,17 @@ class TaskController extends GetxController {
   Future post() async {
     isLoading.value = true;
 
-    String token = auth.user.token!;
-    task.value.id = null;
+    ApiResult result;
 
-    ApiResult<TaskModel> result =
-        await repository.insert(token: token, task: task.value);
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
+
+      result = await repository.insert(token: token, task: task.value);
+    } else {
+      result = await offlineRepository.insert(model: task.value);
+    }
+
+    task.value.id = null;
 
     if (!result.isError) {
       await getAll();

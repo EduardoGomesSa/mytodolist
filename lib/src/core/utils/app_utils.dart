@@ -30,9 +30,11 @@ class AppUtils {
     return created;
   }
 
-  Future removeUserGuest() async {
+  Future<bool> removeUserGuest() async {
     final SharedPreferences storage = await SharedPreferences.getInstance();
-    await storage.setBool('is_guest', false);
+    var removed = await storage.setBool('is_guest', false);
+
+    return removed;
   }
 
   Future<bool> checkUserIsGuest() async {
