@@ -49,8 +49,47 @@ class TaskOfflineRepository {
     }
 
     return ApiResult<bool>(
-        data: false,
-        message: "Não foi possível cadastrar a tarefa. Tente novamente!",
-        isError: true,);
+      data: false,
+      message: "Não foi possível cadastrar a tarefa. Tente novamente!",
+      isError: true,
+    );
+  }
+
+  Future<ApiResult<bool>> update({required TaskModel model}) async {
+    final db = await Db.connection();
+
+    Map<String, dynamic> updateData = {};
+    int updated = 0;
+
+    if (model.name != null || model.name != "") {
+      updateData['name'] = model.name;
+    }
+
+    if (model.description != null) {
+      updateData['description'] = model.description;
+    }
+
+    if (updateData.isNotEmpty) {
+      updated = await db.update(
+        'tasks',
+        updateData,
+        where: 'id = ?',
+        whereArgs: [model.id],
+      );
+    }
+
+    return updated > 0
+        ? ApiResult<bool>(
+            message: "Tarefa atualizada com sucesso!",
+            isError: false,
+          )
+        : ApiResult<bool>(
+            message: "Tarefa não foi atualizada. Tente novamente!",
+            isError: true,
+          );
+  }
+
+  Future<ApiResult<bool>> changeStatus() async {
+
   }
 }
