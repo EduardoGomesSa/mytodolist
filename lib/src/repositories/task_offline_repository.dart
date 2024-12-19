@@ -89,7 +89,47 @@ class TaskOfflineRepository {
           );
   }
 
-  Future<ApiResult<bool>> changeStatus() async {
+  Future<ApiResult<bool>> changeStatus({
+    required int id,
+    required String status,
+  }) async {
+    final db = await Db.connection();
 
+    var changed = await db.update(
+      'tasks',
+      {
+        'status': status
+      },
+      where: 'id = ?', whereArgs: [id], 
+    );
+
+    return changed > 0
+        ? ApiResult<bool>(
+            message: "Status da tarefa atualizado com sucesso!",
+            isError: false,
+          )
+        : ApiResult<bool>(
+            message: "Status da tarefa não foi atualizado",
+            isError: true,
+          );
+  }
+
+  Future<ApiResult<bool>> delete ({required int id}) async {
+    final db = await Db.connection();
+
+    var deleted = await db.delete(
+      'tasks',
+      where: 'id = ?', whereArgs: [id], 
+    );
+
+    return deleted > 0
+        ? ApiResult<bool>(
+            message: "Tarefa excluída com sucesso",
+            isError: false,
+          )
+        : ApiResult<bool>(
+            message: "Não foi possível apagar esta tarefa. Tente novamente",
+            isError: true,
+          );
   }
 }

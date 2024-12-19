@@ -123,7 +123,7 @@ class TaskRepository {
 
     if (response['message'] != null) {
       return ApiResult<bool>(
-          message: "status da tarefa atualizado com sucesso!");
+          message: "Status da tarefa atualizado com sucesso!");
     }
 
     return ApiResult<bool>(
