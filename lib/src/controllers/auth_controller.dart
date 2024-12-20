@@ -109,9 +109,9 @@ class AuthController extends GetxController {
       if (userIsGuest) {
         isGuest.value = userIsGuest;
         Get.offAllNamed(AppRoutes.home);
+      } else {
+        Get.offAllNamed(AppRoutes.login);
       }
-
-      Get.offAllNamed(AppRoutes.login);
     }
   }
 
