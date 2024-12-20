@@ -94,13 +94,22 @@ class TaskController extends GetxController {
   Future changeStatus({required String status, required int id}) async {
     isLoading.value = true;
 
-    String token = auth.user.token!;
+    ApiResult<bool> result;
 
-    ApiResult<bool> result = await repository.changeStatus(
-      token: token,
-      id: id,
-      status: status,
-    );
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
+
+      result = await repository.changeStatus(
+        token: token,
+        id: id,
+        status: status,
+      );
+    } else {
+      result = await offlineRepository.changeStatus(
+        id: id,
+        status: status,
+      );
+    }
 
     if (!result.isError) {
       await getAll();
@@ -120,10 +129,15 @@ class TaskController extends GetxController {
   Future renew() async {
     isLoading.value = true;
 
-    String token = auth.user.token!;
+    ApiResult<bool> result;
 
-    ApiResult<bool> result =
-        await repository.update(token: token, task: task.value);
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
+
+      result = await repository.update(token: token, task: task.value);
+    } else {
+      result = await offlineRepository.update(model: task.value);
+    }
 
     if (!result.isError) {
       await getAll();
@@ -139,9 +153,15 @@ class TaskController extends GetxController {
   Future delete({required int id}) async {
     isLoading.value = true;
 
-    String token = auth.user.token!;
+    ApiResult<bool> result;
 
-    ApiResult<bool> result = await repository.delete(token: token, id: id);
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
+
+      result = await repository.delete(token: token, id: id);
+    } else {
+      result = await offlineRepository.delete(id: id);
+    }
 
     if (!result.isError) {
       if (task.value.id != null && task.value.id! > 0) {
