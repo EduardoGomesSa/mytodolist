@@ -52,14 +52,19 @@ class TaskController extends GetxController {
 
   Future getById({required int id}) async {
     isLoading.value = true;
-    String token = auth.user.token!;
 
-    ApiResult<TaskModel> result =
-        await repository.getById(token: token, id: id);
+    ApiResult<TaskModel> result;
+
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
+
+      result = await repository.getById(token: token, id: id);
+    } else {
+      result = await offlineRepository.getById(id: id);
+    }
 
     if (!result.isError) {
       task.value = result.data!;
-      //task.value.items;
     }
 
     isLoading.value = false;
