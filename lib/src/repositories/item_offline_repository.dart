@@ -1,4 +1,3 @@
-import 'package:mytodolist/src/core/services/http_manager.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/models/item_model.dart';
 import 'package:mytodolist/src/repositories/databases/db.dart';
@@ -25,5 +24,24 @@ class ItemOfflineRepository {
       message: "Não foi possível cadastrar o item. Tente novamente!",
       isError: true,
     );
+  }
+
+  Future<ApiResult<bool>> update({required ItemModel item}) async {
+    final db = await Db.connection();
+
+    var updated = await db.update('items', {
+      'name': item.name,
+    });
+
+    if (updated > 0) {
+      return ApiResult<bool>(
+        message: "Item atualizado com sucesso!",
+        isError: false,
+      );
+    }
+
+    return ApiResult(
+        message: "Erro ao atualizar item. Tente novamente!", isError: true);
+      
   }
 }
