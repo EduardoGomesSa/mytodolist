@@ -3,8 +3,6 @@ import 'package:mytodolist/src/models/item_model.dart';
 import 'package:mytodolist/src/repositories/databases/db.dart';
 
 class ItemOfflineRepository {
-  //ItemOfflineRepository();
-
   Future<ApiResult<ItemModel>> insert({required ItemModel item}) async {
     final db = await Db.connection();
 
@@ -29,9 +27,13 @@ class ItemOfflineRepository {
   Future<ApiResult<bool>> update({required ItemModel item}) async {
     final db = await Db.connection();
 
-    var updated = await db.update('items', {
-      'name': item.name,
-    });
+    var updated = await db.update(
+        'items',
+        {
+          'name': item.name,
+        },
+        where: 'id = ?',
+        whereArgs: [item.id]);
 
     if (updated > 0) {
       return ApiResult<bool>(
@@ -59,6 +61,29 @@ class ItemOfflineRepository {
 
     return ApiResult<bool>(
       message: "Erro ao tentar apagar item. Tente novamente!",
+      isError: true,
+    );
+  }
+
+  Future<ApiResult<bool>> changeStatus({
+    required int id,
+    required String status,
+  }) async {
+    final db = await Db.connection();
+
+    var updated = await db.update(
+      'items',
+      {'status': status},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (updated > 0) {
+      return ApiResult<bool>(message: "Status do item alterado com sucesso");
+    }
+
+    return ApiResult(
+      message: "Erro ao tentar mudar status do item. Tente novamente",
       isError: true,
     );
   }
