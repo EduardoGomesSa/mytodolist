@@ -42,6 +42,24 @@ class ItemOfflineRepository {
 
     return ApiResult(
         message: "Erro ao atualizar item. Tente novamente!", isError: true);
-      
+  }
+
+  Future<ApiResult<bool>> delete({required int id}) async {
+    final db = await Db.connection();
+
+    var deleted = await db.delete(
+      'items',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (deleted > 0) {
+      return ApiResult(message: "Item excluído com sucesso!");
+    }
+
+    return ApiResult<bool>(
+      message: "Erro ao tentar apagar item. Tente novamente!",
+      isError: true,
+    );
   }
 }
