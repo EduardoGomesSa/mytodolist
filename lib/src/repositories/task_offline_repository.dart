@@ -17,6 +17,27 @@ class TaskOfflineRepository {
     return ApiResult<List<TaskModel>>(message: message, isError: true);
   }
 
+  Future<ApiResult<TaskModel>> getById({required int id}) async {
+    final db = await Db.connection();
+
+    var response = await db.query(
+      'tasks',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (response.isNotEmpty) {
+      var task = TaskModel.fromMap(response as Map<String, dynamic>);
+
+      return ApiResult(data: task);
+    }
+
+    return ApiResult(
+      message: "Não foi possível buscar esta tarefa. Tente novamente",
+      isError: true,
+    );
+  }
+
   Future<ApiResult<bool>> insert({required TaskModel model}) async {
     final db = await Db.connection();
 
@@ -97,10 +118,9 @@ class TaskOfflineRepository {
 
     var changed = await db.update(
       'tasks',
-      {
-        'status': status
-      },
-      where: 'id = ?', whereArgs: [id], 
+      {'status': status},
+      where: 'id = ?',
+      whereArgs: [id],
     );
 
     return changed > 0
@@ -114,12 +134,13 @@ class TaskOfflineRepository {
           );
   }
 
-  Future<ApiResult<bool>> delete ({required int id}) async {
+  Future<ApiResult<bool>> delete({required int id}) async {
     final db = await Db.connection();
 
     var deleted = await db.delete(
       'tasks',
-      where: 'id = ?', whereArgs: [id], 
+      where: 'id = ?',
+      whereArgs: [id],
     );
 
     return deleted > 0
