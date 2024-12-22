@@ -76,11 +76,17 @@ class ItemController extends GetxController {
   }
 
   Future delete({required int id, required int taskId}) async {
-    String token = auth.user.token!;
-
     isLoading.value = true;
 
-    ApiResult<bool> result = await repository.delete(token: token, id: id);
+    ApiResult<bool> result;
+
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
+
+      result = await repository.delete(token: token, id: id);
+    } else {
+      result = await offlineRepository.delete(id: id);
+    }
 
     if (!result.isError) {
       await taskController.getById(id: taskId);
