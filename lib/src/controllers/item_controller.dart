@@ -100,15 +100,24 @@ class ItemController extends GetxController {
     required int taskId,
     required String status,
   }) async {
-    String token = auth.user.token!;
-
     isLoading.value = true;
 
-    ApiResult<bool> result = await repository.changeStatus(
-      token: token,
-      id: id,
-      status: status,
-    );
+    ApiResult<bool> result;
+
+    if (!auth.isGuest.value) {
+      String token = auth.user.token!;
+
+      result = await repository.changeStatus(
+        token: token,
+        id: id,
+        status: status,
+      );
+    } else {
+      result = await offlineRepository.changeStatus(
+        id: id,
+        status: status,
+      );
+    }
 
     if (!result.isError) {
       await taskController.getById(id: taskId);
