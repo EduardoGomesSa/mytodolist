@@ -6,7 +6,10 @@ class TaskOfflineRepository {
   Future<ApiResult<List<TaskModel>>> getAll() async {
     final db = await Db.connection();
 
-    var tasks = await db.query('tasks', orderBy: 'created_at DESC');
+    var tasks = await db.query(
+      'tasks',
+      orderBy: 'created_at DESC',
+    );
 
     if (tasks.isNotEmpty) {
       List<TaskModel> listTasks = TaskModel.fromList(tasks as List);
@@ -24,10 +27,24 @@ class TaskOfflineRepository {
       'tasks',
       where: 'id = ?',
       whereArgs: [id],
+      limit: 1,
     );
 
     if (response.isNotEmpty) {
-      var task = TaskModel.fromMap(response as Map<String, dynamic>);
+       var taskFounded = Map<String, dynamic>.from(response.first);
+
+      var items = await db.query(
+        'items',
+        where: 'task_id = ?',
+        whereArgs: [id],
+        orderBy: 'created_at DESC',
+      );
+
+      taskFounded['items'] = items;
+
+      //response['items'] = items;
+
+      var task = TaskModel.fromMap(taskFounded);
 
       return ApiResult(data: task);
     }
