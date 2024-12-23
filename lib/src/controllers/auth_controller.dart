@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
@@ -94,15 +95,27 @@ class AuthController extends GetxController {
   Future validateToken() async {
     String? token = await appUtils.getLocalData(key: 'user-token');
 
-    if (token != null) {
-      ApiResult<UserModel> result = await repository.validateToken(token);
+    var hasInternet = await InternetConnection().hasInternetAccess;
 
-      if (!result.isError) {
-        user = result.data!;
-        Get.offAllNamed(AppRoutes.home);
+    if (hasInternet) {
+      if (token != null) {
+        ApiResult<UserModel> result = await repository.validateToken(token);
+
+        if (!result.isError) {
+          user = result.data!;
+          Get.offAllNamed(AppRoutes.home);
+        } else {
+          appUtils.showToast(message: result.message!, isError: true);
+          Get.offAllNamed(AppRoutes.login);
+        }
       } else {
-        appUtils.showToast(message: result.message!, isError: true);
-        Get.offAllNamed(AppRoutes.login);
+        var userIsGuest = await appUtils.checkUserIsGuest();
+        if (userIsGuest) {
+          isGuest.value = userIsGuest;
+          Get.offAllNamed(AppRoutes.home);
+        } else {
+          Get.offAllNamed(AppRoutes.login);
+        }
       }
     } else {
       var userIsGuest = await appUtils.checkUserIsGuest();
