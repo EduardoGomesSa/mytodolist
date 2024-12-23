@@ -20,10 +20,13 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   UserModel user = UserModel();
   RxBool isGuest = false.obs;
+  RxBool hasInternet = true.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+
+    monitorInternetConnection();
 
     await validateToken();
   }
@@ -95,9 +98,7 @@ class AuthController extends GetxController {
   Future validateToken() async {
     String? token = await appUtils.getLocalData(key: 'user-token');
 
-    var hasInternet = await InternetConnection().hasInternetAccess;
-
-    if (hasInternet) {
+    if (hasInternet.value) {
       if (token != null) {
         ApiResult<UserModel> result = await repository.validateToken(token);
 
@@ -159,6 +160,16 @@ class AuthController extends GetxController {
       Get.offAllNamed(AppRoutes.login);
     } else {
       appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+  }
+
+  void monitorInternetConnection() async {
+    while (true) {
+      bool isConnected = await InternetConnection().hasInternetAccess;
+
+      hasInternet.value = isConnected;
+
+      await Future.delayed(const Duration(seconds: 15));
     }
   }
 }
