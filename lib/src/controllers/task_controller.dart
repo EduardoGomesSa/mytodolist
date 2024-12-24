@@ -105,7 +105,7 @@ class TaskController extends GetxController {
 
     ApiResult<bool> result;
 
-    if (!auth.isGuest.value) {
+    if (!auth.isGuest.value && auth.hasInternet.value) {
       String token = auth.user.token!;
 
       result = await repository.changeStatus(
@@ -164,7 +164,7 @@ class TaskController extends GetxController {
 
     ApiResult<bool> result;
 
-    if (!auth.isGuest.value) {
+    if (!auth.isGuest.value && auth.hasInternet.value) {
       String token = auth.user.token!;
 
       result = await repository.delete(token: token, id: id);
