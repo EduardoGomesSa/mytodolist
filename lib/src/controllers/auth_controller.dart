@@ -7,6 +7,7 @@ import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
 import 'package:mytodolist/src/models/user_model.dart';
 import 'package:mytodolist/src/repositories/auth_repository.dart';
+import 'package:mytodolist/src/repositories/task_offline_repository.dart';
 
 class AuthController extends GetxController {
   final AuthRepository repository;
@@ -132,6 +133,7 @@ class AuthController extends GetxController {
   Future signOut() async {
     if (isGuest.value) {
       await appUtils.removeUserGuest();
+      await TaskOfflineRepository().deleteAllTasks();
       appUtils.showToast(message: "Logout realizado com sucesso!");
       Get.offAllNamed(AppRoutes.login);
       isLoading.value = false;
