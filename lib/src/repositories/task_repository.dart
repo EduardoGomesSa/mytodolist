@@ -86,6 +86,32 @@ class TaskRepository {
     }
   }
 
+  Future<ApiResult> insertAll({
+    required String token,
+    required List<TaskModel> listTasks,
+  }) async {
+    const String endpoint = "${Url.base}/tasks/all";
+
+    List<Map<String, dynamic>> body =
+        listTasks.map((task) => task.toMap()).toList();
+
+    final response = await httpManager.requestList(
+      url: endpoint,
+      method: HttpMethods.post,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response['message'] != null) {
+      return ApiResult(message: "Tarefas foram salvas com sucesso!");
+    }
+
+    return ApiResult(message: "Erro ao tentar salvar tarefas. Tente novamente", isError: true);
+  }
+
   Future<ApiResult<bool>> update(
       {required String token, required TaskModel task}) async {
     const String endpoint = "${Url.base}/tasks";
