@@ -8,6 +8,7 @@ import 'package:mytodolist/src/core/utils/app_utils.dart';
 import 'package:mytodolist/src/models/user_model.dart';
 import 'package:mytodolist/src/repositories/auth_repository.dart';
 import 'package:mytodolist/src/repositories/task_offline_repository.dart';
+import 'package:mytodolist/src/repositories/task_repository.dart';
 
 class AuthController extends GetxController {
   final AuthRepository repository;
@@ -170,6 +171,20 @@ class AuthController extends GetxController {
       bool isConnected = await InternetConnection().hasInternetAccess;
 
       hasInternet.value = isConnected;
+
+      if (hasInternet.value) {
+        var result = await TaskOfflineRepository().getAll();
+
+        if (!result.isError) {
+          var taskRepository = Get.find<TaskRepository>();
+          var saved = await taskRepository.insertAll(
+              token: user.token!, listTasks: result.data!);
+
+          if (!saved.isError) {
+            await TaskOfflineRepository().deleteAllTasks();
+          }
+        }
+      }
 
       await Future.delayed(const Duration(seconds: 15));
     }

@@ -109,7 +109,9 @@ class TaskRepository {
       return ApiResult(message: "Tarefas foram salvas com sucesso!");
     }
 
-    return ApiResult(message: "Erro ao tentar salvar tarefas. Tente novamente", isError: true);
+    return ApiResult(
+        message: "Erro ao tentar salvar tarefas. Tente novamente",
+        isError: true);
   }
 
   Future<ApiResult<bool>> update(
