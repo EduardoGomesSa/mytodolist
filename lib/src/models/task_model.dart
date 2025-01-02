@@ -23,7 +23,7 @@ class TaskModel {
       'name': name,
       'description': description,
       'status': status,
-      'created_at': createdAt,
+      'created_at': createdAt?.toIso8601String(),
       'items': items?.map((e) => e.toMap()).toList(),
     };
   }

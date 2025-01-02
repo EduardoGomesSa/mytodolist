@@ -31,7 +31,7 @@ class TaskOfflineRepository {
     );
 
     if (response.isNotEmpty) {
-       var taskFounded = Map<String, dynamic>.from(response.first);
+      var taskFounded = Map<String, dynamic>.from(response.first);
 
       var items = await db.query(
         'items',
@@ -169,5 +169,23 @@ class TaskOfflineRepository {
             message: "Não foi possível apagar esta tarefa. Tente novamente",
             isError: true,
           );
+  }
+
+  Future<ApiResult> deleteAllTasks() async {
+    final db = await Db.connection();
+
+    var deleted = await db.delete('tasks');
+
+    if (deleted > 0) {
+      return ApiResult<bool>(
+        message: "Todas as tarefa excluídas com sucesso",
+        isError: false,
+      );
+    }
+
+    return ApiResult<bool>(
+      message: "Não foi possível excluír todas as tarefas. Tente novamente",
+      isError: true,
+    );
   }
 }

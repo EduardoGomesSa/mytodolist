@@ -33,7 +33,7 @@ class TaskController extends GetxController {
   Future getAll() async {
     isLoading.value = true;
     ApiResult<List<TaskModel>> result;
-    if (!auth.isGuest.value) {
+    if (!auth.isGuest.value && auth.hasInternet.value) {
       String token = auth.user.token!;
 
       result = await repository.getAll(token: token);
@@ -76,9 +76,13 @@ class TaskController extends GetxController {
     ApiResult result;
 
     if (!auth.isGuest.value) {
-      String token = auth.user.token!;
+      if(auth.hasInternet.value){
+        String token = auth.user.token!;
 
-      result = await repository.insert(token: token, task: task.value);
+        result = await repository.insert(token: token, task: task.value);
+      } else {
+        result = await offlineRepository.insert(model: task.value);
+      }
     } else {
       result = await offlineRepository.insert(model: task.value);
     }
@@ -101,7 +105,7 @@ class TaskController extends GetxController {
 
     ApiResult<bool> result;
 
-    if (!auth.isGuest.value) {
+    if (!auth.isGuest.value && auth.hasInternet.value) {
       String token = auth.user.token!;
 
       result = await repository.changeStatus(
@@ -160,7 +164,7 @@ class TaskController extends GetxController {
 
     ApiResult<bool> result;
 
-    if (!auth.isGuest.value) {
+    if (!auth.isGuest.value && auth.hasInternet.value) {
       String token = auth.user.token!;
 
       result = await repository.delete(token: token, id: id);

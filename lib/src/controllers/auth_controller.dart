@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
 import 'package:mytodolist/src/models/user_model.dart';
 import 'package:mytodolist/src/repositories/auth_repository.dart';
+import 'package:mytodolist/src/repositories/task_offline_repository.dart';
+import 'package:mytodolist/src/repositories/task_repository.dart';
 
 class AuthController extends GetxController {
   final AuthRepository repository;
@@ -19,10 +22,13 @@ class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   UserModel user = UserModel();
   RxBool isGuest = false.obs;
+  RxBool hasInternet = true.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
+
+    monitorInternetConnection();
 
     await validateToken();
   }
@@ -94,15 +100,25 @@ class AuthController extends GetxController {
   Future validateToken() async {
     String? token = await appUtils.getLocalData(key: 'user-token');
 
-    if (token != null) {
-      ApiResult<UserModel> result = await repository.validateToken(token);
+    if (hasInternet.value) {
+      if (token != null) {
+        ApiResult<UserModel> result = await repository.validateToken(token);
 
-      if (!result.isError) {
-        user = result.data!;
-        Get.offAllNamed(AppRoutes.home);
+        if (!result.isError) {
+          user = result.data!;
+          Get.offAllNamed(AppRoutes.home);
+        } else {
+          appUtils.showToast(message: result.message!, isError: true);
+          Get.offAllNamed(AppRoutes.login);
+        }
       } else {
-        appUtils.showToast(message: result.message!, isError: true);
-        Get.offAllNamed(AppRoutes.login);
+        var userIsGuest = await appUtils.checkUserIsGuest();
+        if (userIsGuest) {
+          isGuest.value = userIsGuest;
+          Get.offAllNamed(AppRoutes.home);
+        } else {
+          Get.offAllNamed(AppRoutes.login);
+        }
       }
     } else {
       var userIsGuest = await appUtils.checkUserIsGuest();
@@ -118,6 +134,7 @@ class AuthController extends GetxController {
   Future signOut() async {
     if (isGuest.value) {
       await appUtils.removeUserGuest();
+      await TaskOfflineRepository().deleteAllTasks();
       appUtils.showToast(message: "Logout realizado com sucesso!");
       Get.offAllNamed(AppRoutes.login);
       isLoading.value = false;
@@ -146,6 +163,33 @@ class AuthController extends GetxController {
       Get.offAllNamed(AppRoutes.login);
     } else {
       appUtils.showToast(message: result.message!, isError: result.isError);
+    }
+  }
+
+  void monitorInternetConnection() async {
+    while (true) {
+      bool isConnected = await InternetConnection().hasInternetAccess;
+
+      hasInternet.value = isConnected;
+
+      if (hasInternet.value) {
+        var result = await TaskOfflineRepository().getAll();
+
+        if (!result.isError) {
+          isLoading.value = true;
+          var taskRepository = Get.find<TaskRepository>();
+          var saved = await taskRepository.insertAll(
+              token: user.token!, listTasks: result.data!);
+
+          if (!saved.isError) {
+            await TaskOfflineRepository().deleteAllTasks();
+          }
+
+          isLoading.value = false;
+        }
+      }
+
+      await Future.delayed(const Duration(seconds: 15));
     }
   }
 }
