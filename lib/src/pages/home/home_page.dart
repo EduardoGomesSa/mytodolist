@@ -8,6 +8,8 @@ import 'package:mytodolist/src/pages/profile/profile_page.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
   final taskController = Get.find<TaskController>();
 
   @override
@@ -32,46 +34,50 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: GetX<TaskController>(
-              init: taskController,
-              builder: (controller) {
-                if (taskController.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (taskController.listTask.isEmpty) {
-                  return const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.task, size: 60, color: Colors.black38,),
-                      SizedBox(height: 15),
-                      Center(
-                          child: Text("Nenhuma tarefa cadastrada",
-                              style: TextStyle(fontSize: 18, color: Colors.black38))),
-                    ],
-                  );
-                }
-
-                return ListView.builder(
-                    itemCount: taskController.listTask.length,
-                    itemBuilder: (_, index) {
-                      return TaskCardWidget(
-                        task: taskController.listTask[index],
-                        controller: taskController,
-                        onShowModalEditTask: () => showModalBottomSheet(
-                          isScrollControlled: true,
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(25),
+            child: RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: () async => taskController.getAll(),
+              child: GetX<TaskController>(
+                init: taskController,
+                builder: (controller) {
+                  if (taskController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (taskController.listTask.isEmpty) {
+                    return const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.task, size: 60, color: Colors.black38,),
+                        SizedBox(height: 15),
+                        Center(
+                            child: Text("Nenhuma tarefa cadastrada",
+                                style: TextStyle(fontSize: 18, color: Colors.black38))),
+                      ],
+                    );
+                  }
+              
+                  return ListView.builder(
+                      itemCount: taskController.listTask.length,
+                      itemBuilder: (_, index) {
+                        return TaskCardWidget(
+                          task: taskController.listTask[index],
+                          controller: taskController,
+                          onShowModalEditTask: () => showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(25),
+                              ),
                             ),
+                            builder: (context) {
+                              return TaskAddModal(
+                                  task: taskController.listTask[index]);
+                            },
                           ),
-                          builder: (context) {
-                            return TaskAddModal(
-                                task: taskController.listTask[index]);
-                          },
-                        ),
-                      );
-                    });
-              },
+                        );
+                      });
+                },
+              ),
             ),
           ),
         ],
