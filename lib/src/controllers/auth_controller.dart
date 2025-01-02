@@ -176,6 +176,7 @@ class AuthController extends GetxController {
         var result = await TaskOfflineRepository().getAll();
 
         if (!result.isError) {
+          isLoading.value = true;
           var taskRepository = Get.find<TaskRepository>();
           var saved = await taskRepository.insertAll(
               token: user.token!, listTasks: result.data!);
@@ -183,6 +184,8 @@ class AuthController extends GetxController {
           if (!saved.isError) {
             await TaskOfflineRepository().deleteAllTasks();
           }
+
+          isLoading.value = false;
         }
       }
 
