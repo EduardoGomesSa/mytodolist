@@ -24,11 +24,11 @@ class LoginPage extends StatelessWidget {
             flex: 3,
             child: Container(
               color: Colors.blue,
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
-                    child: Text('Logo'),
+                    child: Image.asset('assets/images/logo.png'),
                   ),
                 ],
               ),
