@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/core/routes/app_routes_pages.dart';
@@ -39,7 +40,7 @@ class LoginPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Center(
-                              child: Image.asset('assets/images/logo.png'),
+                              child: Image.asset('assets/images/logo.png', scale: 1.7,),
                             ),
                           ],
                         ),
