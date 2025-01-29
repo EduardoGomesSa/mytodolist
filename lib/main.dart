@@ -21,7 +21,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
-            titleTextStyle: TextStyle(color: Colors.black, fontSize: 20)),
+            titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
+            iconTheme: IconThemeData(
+              color: Colors.black
+            )),
         useMaterial3: false,
       ),
       debugShowCheckedModeBanner: false,
