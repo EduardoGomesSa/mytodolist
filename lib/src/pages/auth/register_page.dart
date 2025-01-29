@@ -26,12 +26,13 @@ class RegisterPage extends StatelessWidget {
             Column(
               children: [
                 Expanded(
-                  flex: 3,
                   child: Container(
                     color: Colors.blue,
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Center(child: Text('Logo'))],
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        scale: 1.7,
+                      ),
                     ),
                   ),
                 ),
