@@ -140,6 +140,9 @@ class LoginPage extends StatelessWidget {
                               },
                               style: OutlinedButton.styleFrom(
                                 side: const BorderSide(color: Colors.blue),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)
+                                )
                               ),
                               child: const Text('Entrar como convidado'),
                             ),
