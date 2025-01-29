@@ -12,3 +12,4 @@ Um projeto mobile desenvolvido em Flutter para tratar e exibir dados vindo de um
 - Editar item da tarefa
 - Excluir item da tarefa
 - Funcionamento online e offline
+- Backup de tarefas
