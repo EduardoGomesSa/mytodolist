@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -22,155 +23,135 @@ class LoginPage extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         body: LayoutBuilder(
           builder: (context, constraints) {
-            return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight,
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom,
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        color: Colors.blue,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset('assets/images/logo.png', scale: 1.7,),
-                            ),
-                          ],
-                        ),
+            return Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.blue,
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        scale: 1.7,
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 32,
-                          vertical: 40,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 40,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(45),
+                    ),
+                  ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        TextFieldWidget(
+                          controller: emailTextController,
+                          icon: Icons.email,
+                          label: 'Email',
+                          validator: emailvalidator,
                         ),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(45),
+                        TextFieldWidget(
+                          controller: passwordTextController,
+                          icon: Icons.lock,
+                          label: 'Senha',
+                          isSecret: true,
+                          validator: passwordValidator,
+                        ),
+                        SizedBox(
+                          height: 50,
+                          child: GetX<AuthController>(
+                            init: controller,
+                            builder: (controller) {
+                              return ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                                onPressed: controller.isLoading.value
+                                    ? null
+                                    : () {
+                                        FocusScope.of(context).unfocus();
+
+                                        if (_formKey.currentState!.validate()) {
+                                          controller.signIn(
+                                            email: emailTextController.text,
+                                            password:
+                                                passwordTextController.text,
+                                          );
+                                        }
+                                      },
+                                child: controller.isLoading.value
+                                    ? const CircularProgressIndicator()
+                                    : const Text('Entrar'),
+                              );
+                            },
                           ),
                         ),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10, top: 15),
+                          child: Row(
                             children: [
-                              TextFieldWidget(
-                                controller: emailTextController,
-                                icon: Icons.email,
-                                label: 'Email',
-                                validator: emailvalidator,
-                              ),
-                              TextFieldWidget(
-                                controller: passwordTextController,
-                                icon: Icons.lock,
-                                label: 'Senha',
-                                isSecret: true,
-                                validator: passwordValidator,
-                              ),
-                              SizedBox(
-                                height: 50,
-                                child: GetX<AuthController>(
-                                  init: controller,
-                                  builder: (controller) {
-                                    return ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                      onPressed: controller.isLoading.value
-                                          ? null
-                                          : () {
-                                              FocusScope.of(context).unfocus();
-
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                controller.signIn(
-                                                  email:
-                                                      emailTextController.text,
-                                                  password:
-                                                      passwordTextController
-                                                          .text,
-                                                );
-                                              }
-                                            },
-                                      child: controller.isLoading.value
-                                          ? const CircularProgressIndicator()
-                                          : const Text('Entrar'),
-                                    );
-                                  },
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(bottom: 10, top: 15),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Divider(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 15),
-                                      child: Text(
-                                        'Ou',
-                                        style: TextStyle(color: Colors.grey),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Divider(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 45,
-                                child: TextButton(
-                                  onPressed: () {
-                                    Get.toNamed(AppRoutes.register);
-                                  },
-                                  style: TextButton.styleFrom(
-                                    alignment: Alignment.centerRight,
-                                  ),
-                                  child: const Text(
-                                      'Não tem uma conta? Crie aqui'),
+                              Expanded(
+                                child: Divider(
+                                  color: Colors.grey,
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 15),
-                                child: SizedBox(
-                                  height: 45,
-                                  child: OutlinedButton(
-                                    onPressed: () async {
-                                      await controller.createUserGuest();
-                                    },
-                                    style: OutlinedButton.styleFrom(
-                                      side:
-                                          const BorderSide(color: Colors.blue),
-                                    ),
-                                    child: const Text('Entrar como convidado'),
-                                  ),
+                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                child: Text(
+                                  'Ou',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                              Expanded(
+                                child: Divider(
+                                  color: Colors.grey,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 45,
+                          child: TextButton(
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.register);
+                            },
+                            style: TextButton.styleFrom(
+                              alignment: Alignment.centerRight,
+                            ),
+                            child: const Text('Não tem uma conta? Crie aqui'),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: SizedBox(
+                            height: 45,
+                            child: OutlinedButton(
+                              onPressed: () async {
+                                await controller.createUserGuest();
+                              },
+                              style: OutlinedButton.styleFrom(
+                                side: const BorderSide(color: Colors.blue),
+                              ),
+                              child: const Text('Entrar como convidado'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             );
           },
         ),
