@@ -1,6 +1,6 @@
 # Mytodolist
 
-Um projeto mobile desenvolvido em Flutter para tratar e exibir dados vindo de uma API em Laravel
+Um projeto mobile intuitivo e prático, que auxilia o usuário em suas tarefas do dia a dia, desenvolvido em Flutter para tratar e exibir dados vindo de uma API em Laravel.
 
 ## Algumas funcionalidades
 - Criação de conta de usuário
