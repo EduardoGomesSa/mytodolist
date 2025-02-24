@@ -83,6 +83,41 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Column(
         children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+            child: Card(
+              color: Colors.blue,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Eduardo Gomes"),
+                          Text("No app desde 23/02/25"),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text("Total de tarefas: 20"),
+                          Text("Tarefas concluídas: 20"),
+                          Text("Tarefas em aberto: 20"),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
             child: SizedBox(
