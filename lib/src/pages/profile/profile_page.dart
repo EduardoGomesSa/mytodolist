@@ -77,88 +77,100 @@ class ProfilePage extends StatelessWidget {
           });
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Perfil'),
-      ),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
-            child: Card(
-              color: Colors.blue,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Eduardo Gomes"),
-                          Text("No app desde 23/02/25"),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("Total de tarefas: 20"),
-                          Text("Tarefas concluídas: 20"),
-                          Text("Tarefas em aberto: 20"),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-            child: SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    )),
-                onPressed: () {
-                  logoutConfirmation();
-                },
-                child: const Text("Sair"),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-            child: SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    side: const BorderSide(color: Colors.red),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    )),
-                onPressed: () {
-                  deleteAccountConfirmation();
-                },
-                child: const Text(
-                  "Excluir conta",
-                  style: TextStyle(color: Colors.red),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Perfil'),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+              child: Card(
+                color: Colors.blue,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Eduardo Gomes"),
+                            Text("No app desde 23/02/25"),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text("Total de tarefas: 20"),
+                            Text("Tarefas concluídas: 20"),
+                            Text("Tarefas em aberto: 20"),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 45,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            )),
+                        onPressed: () {
+                          logoutConfirmation();
+                        },
+                        child: const Text("Sair"),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 45,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            side: const BorderSide(color: Colors.red),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            )),
+                        onPressed: () {
+                          deleteAccountConfirmation();
+                        },
+                        child: const Text(
+                          "Excluir conta",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
