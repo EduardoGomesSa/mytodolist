@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class UserModel {
   int? id;
   String? name;
@@ -34,9 +36,8 @@ class UserModel {
       name: map['name'],
       email: map['email'],
       password: map['password'],
-      createdAt: map['created_at'] != null
-          ? DateTime.parse(map['created_at'])
-          : null,
+      createdAt:
+          map['created_at'] != null ? DateTime.parse(map['created_at']) : null,
       token: map['token'],
     );
   }
@@ -49,4 +50,8 @@ class UserModel {
 
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source));
+
+  String get formattedCreatedAt {
+    return DateFormat("dd/MM/yy").format(createdAt!);
+  }
 }
