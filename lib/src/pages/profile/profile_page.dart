@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
+import 'package:mytodolist/src/controllers/task_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -8,6 +9,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<AuthController>();
+    final controllerTask = Get.find<TaskController>();
 
     deleteAccountConfirmation() {
       return showDialog(
@@ -123,29 +125,29 @@ class ProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(right: 10, bottom: 10),
+                          padding: const EdgeInsets.only(right: 10, bottom: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                "Total de tarefas: 20",
-                                style: TextStyle(
+                                "Total de tarefas: ${controllerTask.listTask.length}",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   color: Colors.black54,
                                 ),
                               ),
                               Text(
-                                "Tarefas concluídas: 20",
-                                style: TextStyle(
+                                "Tarefas concluídas: ${controllerTask.countTasks('inativo')}",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   color: Colors.black54,
                                 ),
                               ),
                               Text(
-                                "Tarefas em aberto: 20",
-                                style: TextStyle(
+                                "Tarefas em aberto: ${controllerTask.countTasks('ativo')}",
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
                                   color: Colors.black54,

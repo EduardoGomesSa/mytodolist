@@ -23,6 +23,10 @@ class TaskController extends GetxController {
   Rx<TaskModel> task = TaskModel().obs;
   RxList<TaskModel> listTask = RxList<TaskModel>([]);
 
+  String countTasks(String status) {
+    return listTask.where((task) => task.status == status).length.toString();
+  }
+
   @override
   void onInit() {
     getAll();
@@ -76,7 +80,7 @@ class TaskController extends GetxController {
     ApiResult result;
 
     if (!auth.isGuest.value) {
-      if(auth.hasInternet.value){
+      if (auth.hasInternet.value) {
         String token = auth.user.token!;
 
         result = await repository.insert(token: token, task: task.value);
