@@ -1,7 +1,11 @@
+import 'dart:ffi';
+
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
+import 'package:mytodolist/src/core/widgets/pie_chart_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -160,6 +164,43 @@ class ProfilePage extends StatelessWidget {
                     )
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 70),
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 70),
+                    child: Center(
+                      child: Text(
+                        "Estatísticas",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 100,
+                    child: PieChartWidget(
+                      totalTarefas: controllerTask.listTask.length,
+                      tarefasAbertas: controllerTask.countTasks("ativo"),
+                      tarefasConcluidas: controllerTask.countTasks("inativo"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 120),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 100,
+                      child: PieChartWidget(
+                        totalTarefas: controllerTask.listTask.length,
+                        tarefasAbertas: controllerTask.countTasks("ativo"),
+                        tarefasConcluidas: controllerTask.countTasks("inativo"),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Column(

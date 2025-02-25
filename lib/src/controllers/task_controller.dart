@@ -23,8 +23,8 @@ class TaskController extends GetxController {
   Rx<TaskModel> task = TaskModel().obs;
   RxList<TaskModel> listTask = RxList<TaskModel>([]);
 
-  String countTasks(String status) {
-    return listTask.where((task) => task.status == status).length.toString();
+  int countTasks(String status) {
+    return listTask.where((task) => task.status == status).length;
   }
 
   @override
