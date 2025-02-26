@@ -31,11 +31,9 @@ class TaskController extends GetxController {
   Map<String, int> generateTasksByDay() {
     Map<String, int> tasksByDay = {};
 
-    // Gera os últimos 7 dias
     for (int i = 6; i >= 0; i--) {
       DateTime date = DateTime.now().subtract(Duration(days: i));
-      String formattedDate =
-          DateFormat('E', 'pt_BR').format(date); // Exemplo: "Seg", "Ter", etc.
+      String formattedDate = DateFormat('E', 'pt_BR').format(date);
       tasksByDay[formattedDate] = listTask
           .where((task) =>
               task.status == "inativo" && task.createdAt!.day == date.day)

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:intl/intl.dart';
 
 class BarChartWidget extends StatelessWidget {
   final Map<String, int> tasksByDay;
@@ -14,9 +13,11 @@ class BarChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: BarChart(
+        swapAnimationDuration: const Duration(milliseconds: 2000),
         BarChartData(
           barGroups: _getBarGroups(),
           borderData: FlBorderData(show: false),
+          gridData: FlGridData(show: false),
           titlesData: FlTitlesData(
             topTitles: AxisTitles(
               sideTitles: SideTitles(showTitles: false),
@@ -25,7 +26,7 @@ class BarChartWidget extends StatelessWidget {
               sideTitles: SideTitles(showTitles: false),
             ),
             rightTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: true, interval: 10),
+              sideTitles: SideTitles(showTitles: false),
             ),
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
@@ -56,7 +57,7 @@ class BarChartWidget extends StatelessWidget {
               toY: tasksByDay[days[i]]!.toDouble(),
               color: Colors.blue,
               width: 15,
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(6),
             ),
           ],
         ),
