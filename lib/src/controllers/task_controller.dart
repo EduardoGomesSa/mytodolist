@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/core/utils/api_result.dart';
 import 'package:mytodolist/src/core/utils/app_utils.dart';
@@ -25,6 +26,23 @@ class TaskController extends GetxController {
 
   int countTasks(String status) {
     return listTask.where((task) => task.status == status).length;
+  }
+
+  Map<String, int> generateTasksByDay() {
+    Map<String, int> tasksByDay = {};
+
+    // Gera os últimos 7 dias
+    for (int i = 6; i >= 0; i--) {
+      DateTime date = DateTime.now().subtract(Duration(days: i));
+      String formattedDate =
+          DateFormat('E', 'pt_BR').format(date); // Exemplo: "Seg", "Ter", etc.
+      tasksByDay[formattedDate] = listTask
+          .where((task) =>
+              task.status == "inativo" && task.createdAt!.day == date.day)
+          .length;
+    }
+
+    return tasksByDay;
   }
 
   @override

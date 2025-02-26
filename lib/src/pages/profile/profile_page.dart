@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
 import 'package:mytodolist/src/controllers/task_controller.dart';
+import 'package:mytodolist/src/core/widgets/bar_chart_widget.dart';
 import 'package:mytodolist/src/core/widgets/pie_chart_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -193,11 +191,8 @@ class ProfilePage extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       height: 100,
-                      child: PieChartWidget(
-                        totalTarefas: controllerTask.listTask.length,
-                        tarefasAbertas: controllerTask.countTasks("ativo"),
-                        tarefasConcluidas: controllerTask.countTasks("inativo"),
-                      ),
+                      child: BarChartWidget(
+                          tasksByDay: controllerTask.generateTasksByDay()),
                     ),
                   ),
                 ],
