@@ -26,6 +26,7 @@ class TaskModel {
       'description': description,
       'status': status,
       'created_at': createdAt?.toIso8601String(),
+      'updated_at': updatedAt?.toIso8601String(),
       'items': items?.map((e) => e.toMap()).toList(),
     };
   }
