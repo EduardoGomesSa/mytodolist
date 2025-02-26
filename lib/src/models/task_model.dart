@@ -6,6 +6,7 @@ class TaskModel {
   String? description;
   String? status;
   DateTime? createdAt;
+  DateTime? updatedAt;
   List<ItemModel>? items;
 
   TaskModel({
@@ -15,6 +16,7 @@ class TaskModel {
     this.createdAt,
     this.status,
     this.items,
+    this.updatedAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -37,6 +39,9 @@ class TaskModel {
         status: map['status'] != null ? map['status'] as String : null,
         createdAt: map['created_at'] != null
             ? DateTime.parse(map['created_at'] as String)
+            : null,
+        updatedAt: map['updated_at'] != null
+            ? DateTime.parse(map['updated_at'] as String)
             : null,
         items: map['items'] != null
             ? List<ItemModel>.from((map['items'] as List<dynamic>)

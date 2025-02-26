@@ -36,7 +36,7 @@ class TaskController extends GetxController {
       String formattedDate = DateFormat('E', 'pt_BR').format(date);
       tasksByDay[formattedDate] = listTask
           .where((task) =>
-              task.status == "inativo" && task.createdAt!.day == date.day)
+              task.status == "inativo" && task.updatedAt!.day == date.day)
           .length;
     }
 
