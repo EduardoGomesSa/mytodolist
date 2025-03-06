@@ -33,11 +33,18 @@ class TaskController extends GetxController {
 
     for (int i = 6; i >= 0; i--) {
       DateTime date = DateTime.now().subtract(Duration(days: i));
+
+      DateTime normalizedDate = DateTime(date.year, date.month, date.day);
+
       String formattedDate = DateFormat('E', 'pt_BR').format(date);
-      tasksByDay[formattedDate] = listTask
-          .where((task) =>
-              task.status == "inativo" && task.updatedAt!.day == date.day)
-          .length;
+      tasksByDay[formattedDate] = listTask.where((task) {
+        if (task.updatedAt == null) return false;
+
+        DateTime taskDate = DateTime(
+            task.updatedAt!.year, task.updatedAt!.month, task.updatedAt!.day);
+
+        return task.status == "inativo" && taskDate == normalizedDate;
+      }).length;
     }
 
     return tasksByDay;
