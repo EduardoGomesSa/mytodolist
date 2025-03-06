@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mytodolist/src/controllers/auth_controller.dart';
+import 'package:mytodolist/src/core/functions/logout_function.dart';
 
 class GuestPage extends StatelessWidget {
   const GuestPage({
@@ -12,6 +15,42 @@ class GuestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<AuthController>();
+
+    logoutConfirmation() {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              title:
+                  const Text("Tem certeza que gostaria de sair do aplicativo?"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    controller.signOut();
+                  },
+                  child: const Text("Sim"),
+                ),
+                const SizedBox(width: 10),
+                TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text(
+                    "Não",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            );
+          });
+    }
+
     return isGuest
         ? Column(
             children: [
@@ -42,7 +81,9 @@ class GuestPage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         )),
-                    onPressed: () {},
+                    onPressed: () {
+                      logoutConfirmation();
+                    },
                     child: const Text("Sair de convidado"),
                   ),
                 ),
