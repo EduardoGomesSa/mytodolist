@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytodolist/src/controllers/auth_controller.dart';
-import 'package:mytodolist/src/core/functions/logout_function.dart';
 
 class GuestPage extends StatelessWidget {
   const GuestPage({
@@ -54,18 +53,46 @@ class GuestPage extends StatelessWidget {
     return isGuest
         ? Column(
             children: [
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Você está como convidado",
                       style: TextStyle(fontSize: 24, color: Colors.black45),
                     ),
-                    Icon(
-                      Icons.person,
+                    const Icon(
+                      Icons.person_off_outlined,
                       size: 70,
                       color: Colors.black45,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 100),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              const Text(
+                                  "Para ter acesso a mais funcionalidades, registre-se no app"),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed("/register");
+                                  },
+                                  child: const Text(
+                                    "Clique aqui para criar uma conta",
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        decoration: TextDecoration.underline),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
