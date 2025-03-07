@@ -177,8 +177,11 @@ class ProfilePage extends StatelessWidget {
                           padding: EdgeInsets.only(top: 10, bottom: 70),
                           child: Center(
                             child: Text(
-                              "Estatísticas",
-                              style: TextStyle(color: Colors.black),
+                              "Suas estatísticas",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                           ),
                         ),
@@ -193,10 +196,10 @@ class ProfilePage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 120),
+                          padding: const EdgeInsets.only(top: 80),
                           child: SizedBox(
                             width: double.infinity,
-                            height: 100,
+                            height: 150,
                             child: BarChartWidget(
                                 tasksByDay:
                                     controllerTask.generateTasksByDay()),

@@ -13,12 +13,6 @@ class PieChartWidget extends StatelessWidget {
     required this.tarefasConcluidas,
   });
 
-  // const PieChartPage({
-  //   required this.totalTarefas,
-  //   required this.tarefasAbertas,
-  //   required this.tarefasConcluidas,
-  // });
-
   @override
   Widget build(BuildContext context) {
     final double porcentagemAbertas = (tarefasAbertas / totalTarefas) * 100;
@@ -35,8 +29,8 @@ class PieChartWidget extends StatelessWidget {
               title: 'Em abertas ${porcentagemAbertas.toStringAsFixed(1)}%',
               radius: 100,
               titleStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
                   color: Colors.black),
             ),
             PieChartSectionData(
@@ -45,14 +39,15 @@ class PieChartWidget extends StatelessWidget {
               title: 'Concluídas ${porcentagemConcluidas.toStringAsFixed(1)}%',
               radius: 100,
               titleStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
                   color: Colors.black),
             ),
           ],
           borderData: FlBorderData(show: false),
           sectionsSpace: 0,
           centerSpaceRadius: 0,
+          startDegreeOffset: 20,
         ),
       ),
     );

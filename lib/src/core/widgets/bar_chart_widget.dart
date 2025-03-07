@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
@@ -11,31 +13,41 @@ class BarChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size.width;
     return Center(
-      child: BarChart(
-        swapAnimationDuration: const Duration(milliseconds: 2000),
-        BarChartData(
-          barGroups: _getBarGroups(),
-          borderData: FlBorderData(show: false),
-          gridData: FlGridData(show: false),
-          titlesData: FlTitlesData(
-            topTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            leftTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            rightTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                getTitlesWidget: (value, meta) {
-                  List<String> days = tasksByDay.keys.toList();
-                  return Text(days[value.toInt()],
-                      style: const TextStyle(fontSize: 12));
-                },
+      child: Container(
+        padding: const EdgeInsets.only(top: 5),
+        width: size - 30,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.blue,
+          ),
+        ),
+        child: BarChart(
+          swapAnimationDuration: const Duration(milliseconds: 2000),
+          BarChartData(
+            barGroups: _getBarGroups(),
+            borderData: FlBorderData(show: false),
+            gridData: FlGridData(show: false),
+            titlesData: FlTitlesData(
+              topTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              leftTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              rightTitles: AxisTitles(
+                sideTitles: SideTitles(showTitles: false),
+              ),
+              bottomTitles: AxisTitles(
+                sideTitles: SideTitles(
+                  showTitles: true,
+                  getTitlesWidget: (value, meta) {
+                    List<String> days = tasksByDay.keys.toList();
+                    return Text(days[value.toInt()],
+                        style: const TextStyle(fontSize: 12));
+                  },
+                ),
               ),
             ),
           ),
@@ -57,7 +69,7 @@ class BarChartWidget extends StatelessWidget {
               toY: tasksByDay[days[i]]!.toDouble(),
               color: Colors.blue,
               width: 15,
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(4),
             ),
           ],
         ),
