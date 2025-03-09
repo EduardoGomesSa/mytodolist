@@ -18,6 +18,7 @@ class PieChartWidget extends StatelessWidget {
     final double porcentagemAbertas = (tarefasAbertas / totalTarefas) * 100;
     final double porcentagemConcluidas =
         (tarefasConcluidas / totalTarefas) * 100;
+    const double radius = 80;
 
     return Center(
       child: PieChart(
@@ -25,9 +26,9 @@ class PieChartWidget extends StatelessWidget {
           sections: [
             PieChartSectionData(
               value: porcentagemAbertas,
-              color: Colors.blue,
+              color: Colors.red,
               title: 'Em abertas ${porcentagemAbertas.toStringAsFixed(1)}%',
-              radius: 100,
+              radius: radius,
               titleStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
@@ -35,9 +36,9 @@ class PieChartWidget extends StatelessWidget {
             ),
             PieChartSectionData(
               value: porcentagemConcluidas,
-              color: Colors.green,
+              color: Colors.blue,
               title: 'Concluídas ${porcentagemConcluidas.toStringAsFixed(1)}%',
-              radius: 100,
+              radius: radius,
               titleStyle: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,

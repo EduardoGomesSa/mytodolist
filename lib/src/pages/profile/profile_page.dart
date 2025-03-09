@@ -174,7 +174,7 @@ class ProfilePage extends StatelessWidget {
                     child: Column(
                       children: [
                         const Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 70),
+                          padding: EdgeInsets.only(top: 0, bottom: 20),
                           child: Center(
                             child: Text(
                               "Suas estatísticas",
@@ -185,24 +185,53 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 100,
-                          child: PieChartWidget(
-                            totalTarefas: controllerTask.listTask.length,
-                            tarefasAbertas: controllerTask.countTasks("ativo"),
-                            tarefasConcluidas:
-                                controllerTask.countTasks("inativo"),
-                          ),
+                        Column(
+                          children: [
+                            const Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                  child: Text("Desempenho geral:"),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 50),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 80,
+                                child: PieChartWidget(
+                                  totalTarefas: controllerTask.listTask.length,
+                                  tarefasAbertas:
+                                      controllerTask.countTasks("ativo"),
+                                  tarefasConcluidas:
+                                      controllerTask.countTasks("inativo"),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 80),
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 150,
-                            child: BarChartWidget(
-                                tasksByDay:
-                                    controllerTask.generateTasksByDay()),
+                          padding: const EdgeInsets.only(top: 60),
+                          child: Column(
+                            children: [
+                              const Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 15, bottom: 10),
+                                    child: Text("Desempenho durante a semana:"),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: double.infinity,
+                                height: 150,
+                                child: BarChartWidget(
+                                    tasksByDay:
+                                        controllerTask.generateTasksByDay()),
+                              ),
+                            ],
                           ),
                         ),
                       ],
