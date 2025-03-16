@@ -155,6 +155,11 @@ class TaskPage extends StatelessWidget {
                                       controller.task.value.items!.length,
                                   itemBuilder: (_, index) {
                                     return ItemCardWidget(
+                                      isTaskActive:
+                                          controller.task.value.status ==
+                                                  "ativo"
+                                              ? true
+                                              : false,
                                       model:
                                           controller.task.value.items![index],
                                       onShowModalEditItem: () =>

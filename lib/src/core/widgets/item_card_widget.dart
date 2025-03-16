@@ -8,14 +8,18 @@ class ItemCardWidget extends StatelessWidget {
     super.key,
     required this.model,
     required this.onShowModalEditItem,
+    required this.isTaskActive,
   });
 
   final ItemModel model;
   final VoidCallback onShowModalEditItem;
+  final bool isTaskActive;
 
   @override
   Widget build(BuildContext context) {
     final ItemController controller = Get.find();
+
+    final bool isItemOpen = model.status == "ativo" && isTaskActive;
 
     excluirItem() {
       return showDialog(
@@ -34,13 +38,14 @@ class ItemCardWidget extends StatelessWidget {
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
-                  ),
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text("Não", style: TextStyle(color: Colors.white),),
+                  child: const Text(
+                    "Não",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             );
@@ -50,31 +55,32 @@ class ItemCardWidget extends StatelessWidget {
     return ListTile(
       leading: IconButton(
         onPressed: () {
-          controller.changeStatus(
-              id: model.id!,
-              taskId: model.taskId!,
-              status: model.status == "ativo" ? "inativo" : "ativo");
+          isTaskActive
+              ? controller.changeStatus(
+                  id: model.id!,
+                  taskId: model.taskId!,
+                  status: model.status == "ativo" ? "inativo" : "ativo")
+              : () {};
         },
         icon: Icon(
-          model.status == "ativo"
+          isItemOpen
               ? Icons.check_box_outline_blank_sharp
               : Icons.check_box_outlined,
           size: 30,
         ),
-        color: model.status == "ativo" ? Colors.black : Colors.black38,
+        color: isItemOpen ? Colors.black : Colors.black38,
       ),
       title: Text(
         model.name.toString(),
         style: TextStyle(
-            color: model.status == "ativo" ? Colors.black : Colors.black38,
-            decoration: model.status == "ativo"
-                ? TextDecoration.none
-                : TextDecoration.lineThrough),
+            color: isItemOpen ? Colors.black : Colors.black38,
+            decoration:
+                isItemOpen ? TextDecoration.none : TextDecoration.lineThrough),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          model.status == "ativo"
+          isItemOpen
               ? IconButton(
                   onPressed: onShowModalEditItem,
                   icon: const Icon(
@@ -84,11 +90,10 @@ class ItemCardWidget extends StatelessWidget {
               : const SizedBox.shrink(),
           const SizedBox(width: 10),
           IconButton(
-            onPressed: () =>
-                excluirItem(),
+            onPressed: () => excluirItem(),
             icon: Icon(
               Icons.delete,
-              color: model.status == "ativo" ? Colors.black : Colors.black38,
+              color: isItemOpen ? Colors.black : Colors.black38,
             ),
           ),
         ],
