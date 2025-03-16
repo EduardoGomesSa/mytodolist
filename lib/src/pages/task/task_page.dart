@@ -112,7 +112,8 @@ class TaskPage extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 25),
-                              child: Text(model.createdAt.toString()),
+                              child: Text(controller.appUtils
+                                  .formatDateTime(model.createdAt!)),
                             ),
                           ],
                         ),
