@@ -108,14 +108,26 @@ class TaskPage extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 25),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 25),
-                              child: Text(controller.appUtils
+                        Padding(
+                          padding: const EdgeInsets.only(left: 25, right: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(controller.appUtils
                                   .formatDateTime(model.createdAt!)),
-                            ),
-                          ],
+                              Text.rich(
+                                TextSpan(text: "status: ", children: [
+                                  TextSpan(
+                                      text: controller.task.value.status ==
+                                              "ativo"
+                                          ? "ativa"
+                                          : "concluída",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold))
+                                ]),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
