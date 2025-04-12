@@ -19,4 +19,4 @@ Um projeto mobile intuitivo e prático, que auxilia o usuário em suas tarefas d
 - De Barras: Mostra como está sendo o desempenho do usuário durante a semana
 
 ##
-🚧 Em desenvolvimento 🚧
+<p align='center'>🚧 Em desenvolvimento 🚧</p>
