@@ -24,10 +24,13 @@ Para o funcionamento completo deste app, é necessário executar a api desenvolv
 - CRUD de itens de uma tarefa
 - Funcionamento online e offline
 - Redundância para perca de conexão à internet
+- Gráficos de desempenho para usuários cadastrados
 
-## Gráficos 
+## Gráficos: 
 - de Pizza: Mostra como está sendo o desempenho do usuário
 - De Barras: Mostra como está sendo o desempenho do usuário durante a semana
+
+## Telas:
 
 ##
 <p align='center'>🚧 Em desenvolvimento 🚧</p>
