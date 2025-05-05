@@ -1,22 +1,29 @@
 # Mytodolist
-
-Um projeto mobile intuitivo e prático, que auxilia o usuário em suas tarefas do dia a dia, desenvolvido em Flutter para tratar e exibir dados vindo de uma API em Laravel.
+## Sobre:
+<p>Projeto de um app desenvolvido utilizando o framework Flutter. Tendo como objetivo ajudar os usuários a organizarem suas tarefas e ter um maior controle. Para gerar informações pertinentes, foram inseridos gráficos. </p>
+<p>Este app foi desenvolvido para estudo sobre desenvolvimento completo de apps. Sendo um dos grandes objetivos criar um sistema leve, rápido e simples de ser utilizado pelos futuros usuários.</p>
 
 ## Complemento:
-Para o funcionamento completo deste app, é necessário rodar a api feita em Laravel, entretando, é possível utilizar sem o back. <br>
-Api disponível em: https://github.com/EduardoGomesSa/mytodolist-api.git
+Para o funcionamento completo deste app, é necessário executar a api desenvolvida em Laravel, entretando, é possível utilizar sem o back. <br>
+#### Api Laravel disponível em:
+```bash
+  php endereco_arquivo](https://github.com/EduardoGomesSa/mytodolist-api.git
+```
+## Tecnologias:
+- Framework Flutter
+- Linguagem Dart
+- Gerenciador de estado GetX
+- Dio para requisições
+- Padrão MVC para controler de pastas
+- SQLite para banco de dados interno
 
-## Algumas funcionalidades:
+## Funcionalidades:
 - Criação de conta de usuário
-- Login
-- Criar tarefas
-- Atualizar tarefas
-- Excluir tarefas
-- Criar item da tarefa
-- Editar item da tarefa
-- Excluir item da tarefa
+- Login do usuário
+- CRUD de tarefas
+- CRUD de itens de uma tarefa
 - Funcionamento online e offline
-- Backup de tarefas
+- Redundância para perca de conexão à internet
 
 ## Gráficos 
 - de Pizza: Mostra como está sendo o desempenho do usuário
