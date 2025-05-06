@@ -7,8 +7,12 @@
 Para o funcionamento completo deste app, é necessário executar a api desenvolvida em Laravel, entretando, é possível utilizar sem o back. <br>
 #### Api Laravel disponível em:
 ```bash
-  php endereco_arquivo](https://github.com/EduardoGomesSa/mytodolist-api.git
+  https://github.com/EduardoGomesSa/mytodolist-api.git
 ```
+
+## Estrutura: 
+![image](https://github.com/user-attachments/assets/a4681d1d-5f23-45e7-9038-e6c3132e6fdb)
+
 ## Tecnologias:
 - Framework Flutter
 - Linguagem Dart
