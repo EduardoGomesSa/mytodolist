@@ -14,12 +14,14 @@ Para o funcionamento completo deste app, é necessário executar a api desenvolv
 ![image](https://github.com/user-attachments/assets/a4681d1d-5f23-45e7-9038-e6c3132e6fdb)
 
 ## Tecnologias:
-- Framework Flutter
-- Linguagem Dart
-- Gerenciador de estado GetX
-- Dio para requisições
-- Padrão MVC para controler de pastas
-- SQLite para banco de dados interno
+- Framework ``Flutter``
+- Linguagem ``Dart``
+- ``GetX`` como gerenciador de estado
+- ``Dio`` para requisições à API
+- Padrão ``MVC`` para gerenciamento de pastas
+- ``SQLite`` para banco de dados interno
+- ``fl_chart`` para geração de gráficos
+- ``internet_connection_checker_plus`` para monitoramento da conexão à internet
 
 ## Funcionalidades:
 - Criação de conta de usuário
@@ -31,7 +33,7 @@ Para o funcionamento completo deste app, é necessário executar a api desenvolv
 - Gráficos de desempenho para usuários cadastrados
 
 ## Gráficos: 
-- de Pizza: Mostra como está sendo o desempenho do usuário
+- De Pizza: Mostra como está sendo o desempenho do usuário
 - De Barras: Mostra como está sendo o desempenho do usuário durante a semana
 
 ## Telas:
