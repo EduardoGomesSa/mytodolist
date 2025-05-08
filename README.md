@@ -36,7 +36,18 @@ Para o funcionamento completo deste app, é necessário executar a api desenvolv
 - De Pizza: Mostra como está sendo o desempenho do usuário
 - De Barras: Mostra como está sendo o desempenho do usuário durante a semana
 
+
+
+
 ## Telas:
+### Auth
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/0b95d59f-9557-489f-9cb7-7c9154ab6d58" alt="login_app" width="250" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/1fad9d24-633d-41fb-bacf-86552f189ad0" alt="register_app" width="250" />
+  &nbsp;&nbsp;&nbsp;
+</p>
+
 
 ##
 <p align='center'>🚧 Em desenvolvimento 🚧</p>
