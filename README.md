@@ -48,6 +48,29 @@ Para o funcionamento completo deste app, é necessário executar a api desenvolv
   &nbsp;&nbsp;&nbsp;
 </p>
 
+### Home
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/dbb442c9-5a60-4b23-9824-3692d353cc3a" alt="login_app" width="250" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/98e5deca-4b5d-4383-8662-4a6170eaf0a1" alt="register_app" width="250" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/16885636-6db9-4332-9b1d-28d5440d1ba7" alt="register_app" width="250" />
+  &nbsp;&nbsp;&nbsp;
+
+</p>
+
 
 ##
 <p align='center'>🚧 Em desenvolvimento 🚧</p>
+
+
+
+
+
+
+
+
+
+
+
+
